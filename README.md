@@ -159,6 +159,11 @@ Some features of this messaging archiecture are that:
 
 These features make it possible to write (and test!) Kabuki components independently.
 
+### Rendering Libraries
+It probably makes sense to use 3rd-party libraries like Pixi.js and P2 for animations and physics. They work well and they're well documented.
+
+We may want to use Phaser later on, if we develop mini-games. But for now Phaser might be more confusing, since it runs its own game loop.
+
 
 ## IN PROGRESS
 That's what we've got for now. Just some ideas! But coding is on the way...
