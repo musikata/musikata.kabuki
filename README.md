@@ -97,5 +97,68 @@ In addition, an extension-style architecture will let us build Kabuki up in piec
 
 This will let us iterate and learn more quickly.
 
+### Messaging
+Kabuki uses message passing to allow for loosely-coupled components. 
+
+There is a singleton named 'Kabuki' that represents the Kabuki environment. The singleton acts as a message bus. It also runs update loops (like a game engine), which components can hook into by subscribing to various event streams.
+
+Components are created and registered with the singleton. When the register, they are given a reference to the singleton. This is what they can use to access the message bus, and to communicate with other components.
+
+Here's a an example (in a kind of javascript pseudocode):
+
+````
+/**
+ * Let's say we want to show a dancer animation in one region, 
+ * that moves to a metronome beat that is being played offstage.
+ */
+
+ // We define two components, Dancer and Metronome.
+
+ Metronome {
+    startBeat () { ... }
+    getBeatPosition () { ... }
+ }
+
+ Dancer {
+    startDancing(beatProvider) {
+      // Set the specific beat provider, most likely a metronome instance.
+      this.beatProvider = this.kabuki.getComponent(beatProvider);
+      
+      // Hook into the kabuki update loop.
+      this.kabuki.on('update', this.update)
+    },
+
+    update() {
+      // Get the normalized beat position (-.5 to .5, 0 represents the start of the beat)
+      beatPos = this.beatProvider.getBeatPosition();
+      // Update the animation frame.
+      this.animationPosition = beatPos * this.animationLength;
+    }
+ }
+
+ // We then create instances of the components, and register them with the Kabuki singleton.
+ myMetronome = new Metronome(id='myMetronome');
+ Kabuki.registerComponent(myMetronome, id='myMetronome');
+
+ myDancer = new Dancer(id='myDancer');
+ Kabuki.registerComponent(myDancer, id='myDancer');
+
+ // Later on, we start the beat.
+ Kabuki.getComponent('myMetronome').startBeat();
+ // Then we start the dancer, and tell it to dance to the instance
+ // of our metronome.
+ Kabuki.getComponent('myDancer').startDancing('myMetronome');
+
+````
+
+That's roughly the idea.
+
+Some features of this messaging archiecture are that:
+1. Components can be written without any tight coupling between each other.
+1. Kabuki doesn't have to coupled to specific component implementations. It just acts as a dumb messaging bus and reference hub.
+
+These features make it possible to write (and test!) Kabuki components independently.
+
+
 ## IN PROGRESS
 That's what we've got for now. Just some ideas! But coding is on the way...
