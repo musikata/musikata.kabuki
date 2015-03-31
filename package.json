@@ -1,0 +1,19 @@
+{
+  "name": "musikata.kabuki",
+  "version": "0.0.0",
+  "description": "*Note: this project is very much in flux!*",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/musikata/musikata.kabuki.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/musikata/musikata.kabuki/issues"
+  },
+  "homepage": "https://github.com/musikata/musikata.kabuki"
+}
