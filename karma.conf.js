@@ -9,6 +9,13 @@ module.exports = function(karma) {
     ],
 
     files: [
+      'node_modules/karma-babel-preprocessor/node_modules/babel-core/browser-polyfill.js',
+      { 
+        pattern: 'test_assets/*',
+        watched: true,
+        served:  true,
+        included: false
+      },
       'src/**/*.spec.js'
     ],
 
@@ -33,7 +40,8 @@ module.exports = function(karma) {
     colors: true,
 
     browsers: [
-      'PhantomJS'
+      //'PhantomJS'
+      'Chrome'
     ],
 
     singleRun: false
