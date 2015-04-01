@@ -1,5 +1,6 @@
 var $ = require('jquery');
 var Backbone = require('backbone');
+var _ = require('lodash');
 Backbone.$ = $;
 var Base64Utils = require('./Base64Utils');
 
@@ -8,7 +9,7 @@ class AudioManager {
   constructor(options) {
     this.audioContext = options.audioContext;
     this.schedulingInterval = options.schedulingInterval || 1000/60.0;
-    this.radio = options.radio || Object.assign({}, Backbone.Events);
+    this.radio = options.radio || _.extend({}, Backbone.Events);
     this._scheduledEvents = [];
     this._actionHandlers = {};
     this._samples = {};
@@ -40,7 +41,7 @@ class AudioManager {
   }
 
   registerSample(sample) {
-    this._samples[sample.id] = Object.assign({}, sample);
+    this._samples[sample.id] = _.extend({}, sample);
   }
 
   getSample(sample) {
@@ -54,7 +55,7 @@ class AudioManager {
     return this._samples.hasOwnProperty(sample.id);
   }
 
-  // Returns a promisee object representing the
+  // Returns a promise object representing the
   // sample's loading state.
   loadSample(sample) {
     if (! this.sampleIsRegistered(sample)){
@@ -80,7 +81,7 @@ class AudioManager {
       request.onload = function(){
         _this.audioContext.decodeAudioData(request.response, function(audioBuffer){
           _sample.buffer = audioBuffer;
-          loadDeferred.resolve();
+          loadDeferred.resolve(_sample);
         }, loadDeferred.reject);
       }
       request.send();
