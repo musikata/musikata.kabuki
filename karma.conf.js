@@ -26,7 +26,8 @@ module.exports = function(karma) {
     },
 
     reporters: [
-      'progress'
+      'progress',
+      'growl'
     ],
 
     colors: true,
