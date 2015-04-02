@@ -21,8 +21,21 @@ describe('Kabuki', function() {
 
       it('should have a stage', function() {
         var t = new Kabuki.Theatre({el: $container});
-        t.start();
         expect(t.stage).toBeDefined();
+      });
+
+      it('should show the curtains when starting', function() {
+        var t = new Kabuki.Theatre({el: $container});
+        var spy = spyOn(t, 'showCurtains');
+        t.start();
+        expect(spy).toHaveBeenCalled();
+      });
+
+      fit('should hide the curtains after loading', function() {
+        var t = new Kabuki.Theatre({el: $container});
+        var spy = spyOn(t, 'hideCurtains');
+        t.start();
+        this.fail();
       });
     });
 });
