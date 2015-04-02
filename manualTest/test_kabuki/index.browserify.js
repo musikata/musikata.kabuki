@@ -1,6 +1,15 @@
-console.log('foo');
-var Fargus = require('./foo');
-//var k = require('kabuki/Kabuki');
-var $ = require('kabuki/Kabuki');
+require("babelify/polyfill");
+var $ = require('jquery');
+var Kabuki = require('kabuki/src/Kabuki');
 
-new Fargus();
+$(document).ready(function() {
+  console.log('here');
+  var $container = $('<div id="container">');
+  $('body').append($container);
+
+  var t = new Kabuki.Theatre({
+    el: $container
+  });
+
+  t.start();
+});
