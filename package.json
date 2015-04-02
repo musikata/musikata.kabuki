@@ -18,6 +18,10 @@
   "homepage": "https://github.com/musikata/musikata.kabuki",
   "devDependencies": {
     "babelify": "^5.0.4",
+    "broccoli": "^0.15.3",
+    "broccoli-fast-browserify": "^0.2.5",
+    "broccoli-merge-trees": "^0.2.1",
+    "broccoli-static-compiler": "^0.2.1",
     "jasmine-core": "^2.2.0",
     "karma": "^0.12.31",
     "karma-babel-preprocessor": "^4.0.1",
