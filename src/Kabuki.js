@@ -28,6 +28,7 @@ class Theatre extends Marionette.Application {
     $.when.apply($, loadPromises).then(() => {
       console.log('done loading');
       this.hideCurtains();
+      this.channel.trigger('loading:end');
     });
   }
 

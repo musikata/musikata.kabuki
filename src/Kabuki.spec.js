@@ -31,11 +31,15 @@ describe('Kabuki', function() {
         expect(spy).toHaveBeenCalled();
       });
 
-      fit('should hide the curtains after loading', function() {
+      fit('should hide the curtains after loading', function(done) {
         var t = new Kabuki.Theatre({el: $container});
         var spy = spyOn(t, 'hideCurtains');
+        t.channel.on('loading:end', function() {
+          expect(spy).toHaveBeenCalled();
+          done();
+        });
+
         t.start();
-        this.fail();
       });
     });
 });
