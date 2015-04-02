@@ -1,2 +1,4 @@
 console.log('foo');
-require('./foo');
+var Fargus = require('./foo');
+
+new Fargus();

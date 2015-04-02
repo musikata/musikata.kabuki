@@ -27,7 +27,8 @@ manualTestTrees.js = fastBrowserify('manualTest', {
         var out = relativePath.replace(/\.browserify.js$/,'.js');
         out = path.join('manualTest', out);
         return out;
-      }
+      },
+      transform: require('babelify'),
     }
   }
 });

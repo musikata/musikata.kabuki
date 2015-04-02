@@ -1,4 +1,9 @@
 console.log('groggle');
 
-module.exports = 'pickle';
+class Fargus {
+  constructor() {
+    console.log('fargus!');
+  }
+}
 
+module.exports = Fargus;
