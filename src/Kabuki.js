@@ -27,7 +27,6 @@ class Theatre extends Marionette.Application {
     // when loading finishes, hide curtains.
     $.when.apply($, loadPromises).then(() => {
       console.log('done loading');
-      this.hideCurtains();
       this.channel.trigger('loading:end');
     });
   }
