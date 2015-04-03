@@ -3,7 +3,7 @@ var _ = require('underscore');
 
 
 var ControlsView = Marionette.ItemView.extend({
-  template: _.template('next')
+  template: _.template('<span class="button expand">next</span>')
 });
 
 module.exports = ControlsView;

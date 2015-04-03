@@ -4,12 +4,12 @@ var Kabuki = require('kabuki/src/Kabuki');
 
 $(document).ready(function() {
   console.log('here');
-  var $container = $('<div id="container">');
-  $('body').append($container);
+  var $theatreEl = $('<div class="kb-theatre">');
+  $('body').append($theatreEl);
 
-  var t = new Kabuki.Theatre({
-    el: $container
+  var ka = new Kabuki.KabukiApp({
+    el: $theatreEl
   });
 
-  t.start();
+  ka.start();
 });
