@@ -18,6 +18,7 @@
   "homepage": "https://github.com/musikata/musikata.kabuki",
   "devDependencies": {
     "babelify": "^5.0.4",
+    "brfs": "^1.4.0",
     "broccoli": "^0.15.3",
     "broccoli-fast-browserify": "^0.2.5",
     "broccoli-merge-trees": "^0.2.1",
@@ -41,6 +42,8 @@
     "underscore": "^1.8.3"
   },
   "browserify": {
-    "transform": ["babelify"]
+    "transform": [
+      "babelify"
+    ]
   }
 }

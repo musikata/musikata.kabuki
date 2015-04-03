@@ -2,7 +2,7 @@ var Kabuki = require('./Kabuki');
 var $ = require('jquery');
 
 describe('Kabuki', function() {
-    fdescribe('Kabuki.Theatre', function() {
+    fdescribe('Kabuki.KabukiApp', function() {
 
       var $container;
 
@@ -15,29 +15,33 @@ describe('Kabuki', function() {
         $container.remove();
       });
 
+      function generateKabukiApp() {
+        return new Kabuki.KabukiApp({el: $container});
+      };
+
       it('it should be defined', function() {
-        expect(Kabuki.Theatre).toBeDefined();
+        expect(Kabuki.KabukiApp).toBeDefined();
       });
 
-      it('should have a stage', function() {
-        var t = new Kabuki.Theatre({el: $container});
-        expect(t.stage).toBeDefined();
+      it('should have a theatre', function() {
+        var ka = generateKabukiApp();
+        expect(ka.theatre).toBeDefined();
       });
 
       it('should show the curtains when starting', function() {
-        var t = new Kabuki.Theatre({el: $container});
-        var spy = spyOn(t, 'showCurtains');
-        t.start();
+        var ka = generateKabukiApp();
+        var spy = spyOn(ka, 'showCurtains');
+        ka.start();
         expect(spy).toHaveBeenCalled();
       });
 
-      fit('should trigger the loading:end event after loading', function(done) {
-        var t = new Kabuki.Theatre({el: $container});
-        t.channel.on('loading:end', function() {
+      it('should trigger the loading:end event after loading', function(done) {
+        var ka = new Kabuki.KabukiApp({el: $container});
+        ka.channel.on('loading:end', function() {
           done();
         });
 
-        t.start();
+        ka.start();
       });
     });
 });

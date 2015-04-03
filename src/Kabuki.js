@@ -5,12 +5,14 @@
 var $ = require('jquery');
 var Marionette = require('./marionette-shim');
 
+var TheatreLayoutView = require('./TheatreLayoutView');
+
 var Kabuki = {};
 
-class Theatre extends Marionette.Application {
+class KabukiApp extends Marionette.Application {
   initialize(options) {
 
-    this.stage = new Marionette.LayoutView({
+    this.theatre = new TheatreLayoutView({
       el: options.el
     });
   }
@@ -28,7 +30,6 @@ class Theatre extends Marionette.Application {
   }
 
   showCurtains() {
-    this.stage.$el.html('curtain');
   }
 
   hideCurtains() {
@@ -36,7 +37,7 @@ class Theatre extends Marionette.Application {
 
 }
 
-Kabuki.Theatre = Theatre;
+Kabuki.KabukiApp = KabukiApp;
 
 module.exports = Kabuki;
 
