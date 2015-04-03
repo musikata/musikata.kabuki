@@ -2,6 +2,7 @@
 // Main Kabuki code.
 //
 
+var _ = require('underscore');
 var $ = require('jquery');
 var Marionette = require('./marionette-shim');
 
@@ -13,7 +14,7 @@ var KabukiApp = Marionette.Application.extend({
 
   initialize(options) {
     this.theatre = new TheatreLayoutView({
-      el: options.el
+      el: options.el,
     });
   },
 
@@ -32,6 +33,13 @@ var KabukiApp = Marionette.Application.extend({
   },
 
   showCurtains() {
+    console.log(this.options);
+    // Show a loading view.
+    var loadingImgSrc = this.options.loadingImgSrc;
+    var LoadingView = Marionette.ItemView.extend({
+      template: _.template('<img src="' + loadingImgSrc + '"/>')
+    });
+    this.theatre.showChildView('stage', new LoadingView());
   },
 
   hideCurtains() {

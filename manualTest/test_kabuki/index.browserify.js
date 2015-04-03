@@ -8,7 +8,8 @@ $(document).ready(function() {
   $('body').append($theatreEl);
 
   var ka = new Kabuki.KabukiApp({
-    el: $theatreEl
+    el: $theatreEl,
+      loadingImgSrc: 'circle.gif'
   });
 
   ka.start();
