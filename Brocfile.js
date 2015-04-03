@@ -9,6 +9,9 @@ var compileSass = require('broccoli-sass');
 // SASS
 var sassTree = compileSass(['styles/kabuki', 'styles/foundation'], 'app.scss', 'styles/kabuki/app.css');
 
+
+var srcTree = 'src';
+
 //
 // Manual testing builds.
 //
@@ -17,11 +20,11 @@ var manualTestTrees = {};
 
 manualTestTrees.static = pickFiles('manualTest', {
   srcDir: '/',
-  files: ['**/*.html'],
+  files: ['**/*.html', '**/*.gif'],
   destDir: 'manualTest'
 });
 
-manualTestTrees.js = fastBrowserify('manualTest', {
+manualTestTrees.js = fastBrowserify(mergeTrees([srcTree, 'manualTest']), {
   bundles: {
     "**/index.browserify.js": {
       glob: true,
