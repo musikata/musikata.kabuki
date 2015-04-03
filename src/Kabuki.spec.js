@@ -31,11 +31,9 @@ describe('Kabuki', function() {
         expect(spy).toHaveBeenCalled();
       });
 
-      fit('should hide the curtains after loading', function(done) {
+      fit('should trigger the loading:end event after loading', function(done) {
         var t = new Kabuki.Theatre({el: $container});
-        var spy = spyOn(t, 'hideCurtains');
         t.channel.on('loading:end', function() {
-          expect(spy).toHaveBeenCalled();
           done();
         });
 
