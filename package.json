@@ -22,6 +22,7 @@
     "broccoli": "^0.15.3",
     "broccoli-fast-browserify": "^0.2.5",
     "broccoli-merge-trees": "^0.2.1",
+    "broccoli-sass": "^0.6.3",
     "broccoli-static-compiler": "^0.2.1",
     "jasmine-core": "^2.2.0",
     "karma": "^0.12.31",

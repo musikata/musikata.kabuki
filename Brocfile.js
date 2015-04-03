@@ -1,8 +1,13 @@
+var path = require('path');
+
 var mergeTrees = require('broccoli-merge-trees');
 var pickFiles = require('broccoli-static-compiler');
 var fastBrowserify = require('broccoli-fast-browserify');
-var path = require('path');
+var compileSass = require('broccoli-sass');
 
+
+// SASS
+var sassTree = compileSass(['styles'], 'kabuki/app.scss', 'styles/kabuki/app.css');
 
 //
 // Manual testing builds.
@@ -34,6 +39,7 @@ manualTestTrees.js = fastBrowserify('manualTest', {
 });
 
 module.exports = mergeTrees([
+  sassTree,
   manualTestTrees.static, 
   manualTestTrees.js
 ]);
