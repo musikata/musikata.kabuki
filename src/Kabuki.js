@@ -3,19 +3,16 @@
 //
 
 var $ = require('jquery');
-var Backbone = require('backbone');
-Backbone.$ = $;
-require('./radio.shim');
-var Marionette = require('backbone.marionette');
+var Marionette = require('./marionette-shim');
 
 var Kabuki = {};
 
 class Theatre extends Marionette.Application {
   initialize(options) {
 
-    this.stage = Marionette.LayoutView.extend({
+    this.stage = new Marionette.LayoutView({
       el: options.el
-    })
+    });
   }
 
   onStart(options) {
@@ -24,19 +21,17 @@ class Theatre extends Marionette.Application {
     // start loading
     var loadPromises = [];
 
-    // when loading finishes, hide curtains.
+    // when loading finishes, show 'next' button.
     $.when.apply($, loadPromises).then(() => {
-      console.log('done loading');
       this.channel.trigger('loading:end');
     });
   }
 
   showCurtains() {
-    console.log('showCurtains');
+    this.stage.$el.html('curtain');
   }
 
   hideCurtains() {
-    console.log('hideCurtains');
   }
 
 }
