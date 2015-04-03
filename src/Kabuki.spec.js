@@ -5,6 +5,7 @@ describe('Kabuki', function() {
     fdescribe('Kabuki.KabukiApp', function() {
 
       var $container;
+      var ka;
 
       beforeEach(function() {
         $container = $('<div>');
@@ -24,24 +25,43 @@ describe('Kabuki', function() {
       });
 
       it('should have a theatre', function() {
-        var ka = generateKabukiApp();
+        ka = generateKabukiApp();
         expect(ka.theatre).toBeDefined();
       });
 
-      it('should show the curtains when starting', function() {
-        var ka = generateKabukiApp();
-        var spy = spyOn(ka, 'showCurtains');
-        ka.start();
-        expect(spy).toHaveBeenCalled();
-      });
+      describe('when loading', function() {
 
-      it('should trigger the loading:end event after loading', function(done) {
-        var ka = new Kabuki.KabukiApp({el: $container});
-        ka.channel.on('loading:end', function() {
-          done();
+        beforeEach(function() {
+          ka = generateKabukiApp();
         });
 
-        ka.start();
+        it('should show the curtains', function() {
+          var spy = spyOn(ka, 'showCurtains');
+          ka.start();
+          expect(spy).toHaveBeenCalled();
+        });
+
+        it('should trigger the loading:end event when loading is done', function(done) {
+          ka.channel.on('loading:end', function() {
+            done();
+          });
+
+          ka.start();
+        });
       });
+
+      describe('after loading', function() {
+        beforeEach(function(done) {
+          ka = generateKabukiApp();
+          ka.channel.on('loading:end', done);
+          ka.start();
+        });
+
+        it('should show the next button', function() {
+          expect(ka.el.html()).toContain('next');
+        });
+
+      });
+
     });
 });

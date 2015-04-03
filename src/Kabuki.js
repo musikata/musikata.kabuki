@@ -9,15 +9,17 @@ var TheatreLayoutView = require('./TheatreLayoutView');
 
 var Kabuki = {};
 
-class KabukiApp extends Marionette.Application {
-  initialize(options) {
+var KabukiApp = Marionette.Application.extend({
 
+  initialize(options) {
     this.theatre = new TheatreLayoutView({
       el: options.el
     });
-  }
+  },
 
   onStart(options) {
+    this.theatre.render();
+
     this.showCurtains();
 
     // start loading
@@ -27,15 +29,15 @@ class KabukiApp extends Marionette.Application {
     $.when.apply($, loadPromises).then(() => {
       this.channel.trigger('loading:end');
     });
-  }
+  },
 
   showCurtains() {
-  }
+  },
 
   hideCurtains() {
   }
 
-}
+});
 
 Kabuki.KabukiApp = KabukiApp;
 
