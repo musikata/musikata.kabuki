@@ -1,3 +1,26 @@
+@import "settings";
+@import "foundation";
+
+@import url(http://fonts.googleapis.com/css?family=Merienda:400,700);
+
 body {
-  background-color: blue;
+  font-family: 'Merienda', cursive;
+}
+
+.kb-theatre {
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 280px;
+  width: 240px;
+  border: thin solid #eee;
+}
+
+.kb-stage {
+  height: 240px;
+}
+
+.kb-controls {
+  height: 40px;
+  border-top: thin solid #eee;
 }

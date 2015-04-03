@@ -7,7 +7,7 @@ var compileSass = require('broccoli-sass');
 
 
 // SASS
-var sassTree = compileSass(['styles'], 'kabuki/app.scss', 'styles/kabuki/app.css');
+var sassTree = compileSass(['styles/kabuki', 'styles/foundation'], 'app.scss', 'styles/kabuki/app.css');
 
 //
 // Manual testing builds.
