@@ -33,7 +33,6 @@ var KabukiApp = Marionette.Application.extend({
   },
 
   showCurtains() {
-    console.log(this.options);
     // Show a loading view.
     var loadingImgSrc = this.options.loadingImgSrc;
     var LoadingView = Marionette.ItemView.extend({

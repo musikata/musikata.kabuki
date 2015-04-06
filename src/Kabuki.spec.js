@@ -2,7 +2,7 @@ var Kabuki = require('./Kabuki');
 var $ = require('jquery');
 
 describe('Kabuki', function() {
-    fdescribe('Kabuki.KabukiApp', function() {
+    describe('Kabuki.KabukiApp', function() {
 
       var $container;
       var ka;
