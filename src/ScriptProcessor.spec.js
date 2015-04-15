@@ -6,21 +6,10 @@ var ScriptProcessor = require('./ScriptProcessor');
 fdescribe('ScriptProcessor', function() {
 
     class MockCommandHandler {
-        constructor() {
-            this.promises = {};
-        }
 
         handle(cmd) {
-            if (cmd.data && cmd.data.blocking) {
-                var dfd = new $.Deferred();
-
-                setTimeout(function() {
-                    dfd.resolve();
-                }, 100);
-
-                var promise = this.promises[cmd.id] = dfd.promise();
-
-                return promise;
+            if (cmd.func) {
+                return cmd.func();
             }
         }
     }
@@ -55,38 +44,30 @@ fdescribe('ScriptProcessor', function() {
 
     });
 
-    fit('should wait for blocking sequential commands', function(done){
+    fit('should wait for blocking sequential commands', function(){
         var scriptProcessor = generateScriptProcessor();
         var handler = scriptProcessor.commandHandler;
         spyOn(handler, 'handle').and.callThrough();
 
+        var aDfd = new $.Deferred();
+
         var script = {
             commands: [
-                {id: 'a', data: {blocking: true}},
+                {id: 'a', func: function(){
+                    return aDfd.promise();
+                }},
                 {id: 'b'}
             ]
         }
 
         scriptProcessor.processScript(script);
 
-        expect(handler.handle).not.toHaveBeenCalledWith(
-            jasmine.objectContaining({id: 'a'}));
+        expect(handler.handle).toHaveBeenCalledWith(jasmine.objectContaining({id: 'a'}));
+        expect(handler.handle).not.toHaveBeenCalledWith(jasmine.objectContaining({id: 'b'}));
 
-        expect(handler.handle).not.toHaveBeenCalledWith(
-            jasmine.objectContaining({id: 'b'}));
+        aDfd.resolve();
 
-        handler.promises['a'].then(function() {
-            expect(handler.handle).toHaveBeenCalledWith(
-                jasmine.objectContaining({id: 'a'}));
-
-            expect(handler.handle).not.toHaveBeenCalledWith(
-                jasmine.objectContaining({id: 'b'}));
-        }).done(function() {
-            expect(handler.handle).toHaveBeenCalledWith(
-                jasmine.objectContaining({id: 'b'}));
-                done();
-        });
-
+        expect(handler.handle).toHaveBeenCalledWith(jasmine.objectContaining({id: 'b'}));
     });
 
 });
