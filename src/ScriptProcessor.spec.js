@@ -8,7 +8,7 @@ fdescribe('ScriptProcessor', function() {
     class MockCommandHandler {
 
         handle(cmd) {
-            if (cmd.func) {
+            if (cmd && cmd.func) {
                 return cmd.func();
             }
         }
