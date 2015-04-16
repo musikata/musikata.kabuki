@@ -17,7 +17,7 @@ function wait(opts) {
 
 module.exports = {
   pluginId: 'Core',
-  handlers: {
+  services: {
     'wait': wait
   }
 };

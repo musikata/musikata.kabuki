@@ -14,15 +14,21 @@ var Kabuki = {};
 
 var KabukiApp = Marionette.Application.extend({
 
-  initialize(options) {
+  initialize(opts) {
 
-    this.script = options.script;
+    this.script = opts.script;
+    this.plugins = opts.plugins;
+
     this.scriptProcessor = new ScriptProcessor({
-        commandHandler: new CommandHandler({channel: this.channel})
+        commandHandler: new CommandHandler({
+            channel: this.channel,
+            plugins: this.plugins
+        })
     });
 
     this.theatre = new TheatreLayoutView({
-      el: options.el,
+      el: opts.el,
+      channel: this.channel
     });
   },
 

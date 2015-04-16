@@ -2,14 +2,14 @@ require("babelify/polyfill");
 var $ = require('jquery');
 var Kabuki = require('kabuki/src/Kabuki');
 var CorePlugin = require('kabuki/src/plugins/Core/Core');
-var BasicText = require('kabuki/src/plugins/BasicText/BasicText');
+var BasicTextPlugin = require('kabuki/src/plugins/BasicText/BasicText');
 
 var script = {
     commands: [
-        {cmd: 'widget:create:text', opts: {widgetId: 'text1'}},
-        {cmd: 'text:show', opts: {widgetId: 'text1', text: 'This is the first text'}},
-        {cmd: 'wait', opts: {time: 2000}},
-        {cmd: 'text:show', opts: {widgetId: 'text1', text: 'This is the second text'}},
+        {cmd: 'widget:create', pluginId: 'Text', widgetClassId: 'TextWidget', widgetId: 'text1', regionId: 'stage'},
+        {cmd: 'widget:request', widgetId: 'text1', request: 'showText', requestOpts: {text: 'This is the first text'}},
+        {cmd: 'service', pluginId: 'Core', serviceId: 'wait', serviceOpts: {time: 1000}},
+        {cmd: 'widget:request', widgetId: 'text1', request: 'showText', requestOpts: {text: 'This is the second text'}},
     ]
 };
 
@@ -22,7 +22,11 @@ $(document).ready(function() {
   var k = new Kabuki.KabukiApp({
     el: $theatreEl,
     loadingImgSrc: 'circle.gif',
-    script: script
+    script: script,
+    plugins: {
+        'Core': CorePlugin,
+        'Text': BasicTextPlugin
+    }
   });
 
   k.start();
