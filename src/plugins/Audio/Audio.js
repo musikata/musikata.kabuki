@@ -6,11 +6,15 @@
 var $ = require('jquery');
 
 class AudioWidget {
-  constructor(options) {
-    this.audioManager = options.audioManager;
+  constructor(opts) {
+    this.audioManager = opts.audioManager;
+    this.channel = opts.channel;
+
+    this.channel.reply('playSample', this.playSample, this);
   }
 
   playSample(sampleOpts) {
+    console.log('ps', sampleOpts);
     var playDfd = new $.Deferred();
     this.audioManager.loadSample(sampleOpts).then((sample) => {
       this.audioManager.scheduleEvent({
