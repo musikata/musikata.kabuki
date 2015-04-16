@@ -88,7 +88,7 @@ We can write scripts that take advantage of whatever capabilities our stage prov
 
 This is a bit like the lego block idea: from a few small pieces, we can build up big things.
 
-### Extension Architecture
+### Plugin Architecture
 What if we want something to happen in our script that our stage can't do?  For example, what if we want to have fog in our play, but our stage doesn't have a built-in smoke machine? We bring in our own machine!
 
 Similarly, Kabuki should be designed so that it can be extended. For example, for showing special visualizations, or playing special sounds. We shouldn't have to know ahead of time all the thigns that every script will need to do.
@@ -96,6 +96,11 @@ Similarly, Kabuki should be designed so that it can be extended. For example, fo
 In addition, an extension-style architecture will let us build Kabuki up in pieces. We can start with the simple pieces, like showing text, build some scripts with those pieces, and see how it works.
 
 This will let us iterate and learn more quickly.
+
+Notes: different types of things plugins can provide. Ideas:
+- widgets (a text widget)
+- handlers (a wait command) (maybe this should be called services? Starting to sound very angular-ish)
+
 
 ### Messaging
 Kabuki uses message passing to allow for loosely-coupled components. 
