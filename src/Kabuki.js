@@ -10,6 +10,7 @@ var TheatreLayoutView = require('./TheatreLayoutView');
 var ScriptProcessor = require('./ScriptProcessor');
 var CommandHandler = require('./CommandHandler');
 
+
 var Kabuki = {};
 
 var KabukiApp = Marionette.Application.extend({

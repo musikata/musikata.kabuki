@@ -10,9 +10,9 @@ class AudioWidget {
     this.audioManager = options.audioManager;
   }
 
-  playSample(sampleOptions) {
+  playSample(sampleOpts) {
     var playDfd = new $.Deferred();
-    this.audioManager.loadSample(sampleOptions).then((sample) => {
+    this.audioManager.loadSample(sampleOpts).then((sample) => {
       this.audioManager.scheduleEvent({
         action: 'sample:start',
         time: this.audioManager.getCurrentTime(),

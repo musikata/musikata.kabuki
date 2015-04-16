@@ -15,9 +15,19 @@ function wait(opts) {
     return dfd.promise();
 }
 
+/**
+ * Run a generic loader, passed in as a handler function.
+ **/
+function genericLoader(opts) {
+    return $.when(opts.handler());
+}
+
 module.exports = {
   pluginId: 'Core',
   services: {
     'wait': wait
+  },
+  loaders: {
+    'Generic': genericLoader
   }
 };

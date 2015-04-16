@@ -1,6 +1,6 @@
 var $ = require('jquery');
-var audioCtx = require('../AudioManager/AudioContext.js');
-var AudioManager = require('../AudioManager/AudioManager.js');
+var audioCtx = require('../../AudioManager/AudioContext.js');
+var AudioManager = require('../../AudioManager/AudioManager.js');
 var AudioPlugin = require('./AudioPlugin');
 
 var audioManager = new AudioManager({audioContext: audioCtx});
