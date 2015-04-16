@@ -24,6 +24,12 @@ manualTestTrees.static = pickFiles('manualTest', {
   destDir: 'manualTest'
 });
 
+var testAssetsTree = pickFiles('test_assets', {
+    srcDir: '/',
+    files: ['**/*'],
+    destDir: 'test_assets'
+});
+
 manualTestTrees.js = fastBrowserify(mergeTrees([srcTree, 'manualTest']), {
   bundles: {
     "**/index.browserify.js": {
@@ -44,5 +50,6 @@ manualTestTrees.js = fastBrowserify(mergeTrees([srcTree, 'manualTest']), {
 module.exports = mergeTrees([
   sassTree,
   manualTestTrees.static, 
-  manualTestTrees.js
+  manualTestTrees.js,
+  testAssetsTree
 ]);
