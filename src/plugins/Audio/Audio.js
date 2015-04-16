@@ -14,7 +14,6 @@ class AudioWidget {
   }
 
   playSample(sampleOpts) {
-    console.log('ps', sampleOpts);
     var playDfd = new $.Deferred();
     this.audioManager.loadSample(sampleOpts).then((sample) => {
       this.audioManager.scheduleEvent({

@@ -19,6 +19,7 @@ var KabukiApp = Marionette.Application.extend({
 
     this.script = opts.script;
     this.plugins = opts.plugins;
+    this.assetsToLoad = opts.assetsToLoad;
 
     this.scriptProcessor = new ScriptProcessor({
         commandHandler: new CommandHandler({
@@ -40,6 +41,12 @@ var KabukiApp = Marionette.Application.extend({
 
     // start loading
     var loadPromises = [];
+    if (this.assetsToLoad) {
+        this.assetsToLoad.forEach((asset) => {
+            var loader = this.plugins[asset.pluginId].loaders[asset.loaderId];
+            loadPromises.push(loader(asset.loaderOpts));
+        });
+    }
 
     // when loading finishes, show 'next' button.
     $.when.apply($, loadPromises).then(() => {

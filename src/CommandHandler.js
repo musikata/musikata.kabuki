@@ -27,8 +27,11 @@ class CommandHandler {
                     channel: widgetChannel
                 }
 
-                var region = this.channel.request('region:get', cmd.regionId)
-                region.show(widget);
+                if (cmd.regionId) {
+                    var region = this.channel.request('region:get', cmd.regionId)
+                    region.show(widget);
+                }
+
             } else if (action == 'request') {
                 var widgetChannel = this._widgetRegistry[cmd.widgetId].channel;
                 return widgetChannel.request(cmd.request, cmd.requestOpts);
