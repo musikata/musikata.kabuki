@@ -4,7 +4,8 @@
  **/
 
 class CommandHandler {
-    constructor() {
+    constructor(opts) {
+        this.channel = opts.channel;
     }
 
     handle(cmd) {

@@ -7,12 +7,20 @@ var $ = require('jquery');
 var Marionette = require('./marionette-shim');
 
 var TheatreLayoutView = require('./TheatreLayoutView');
+var ScriptProcessor = require('./ScriptProcessor');
+var CommandHandler = require('./CommandHandler');
 
 var Kabuki = {};
 
 var KabukiApp = Marionette.Application.extend({
 
   initialize(options) {
+
+    this.script = options.script;
+    this.scriptProcessor = new ScriptProcessor({
+        commandHandler: new CommandHandler({channel: this.channel})
+    });
+
     this.theatre = new TheatreLayoutView({
       el: options.el,
     });
@@ -29,6 +37,7 @@ var KabukiApp = Marionette.Application.extend({
     // when loading finishes, show 'next' button.
     $.when.apply($, loadPromises).then(() => {
       this.channel.trigger('loading:end');
+      this.scriptProcessor.processScript(this.script);
     });
   },
 
