@@ -4,7 +4,7 @@
 
 var Core = require('./Core');
 
-fdescribe('Core Plugins', function() {
+describe('Core Plugins', function() {
     describe('wait command', function() {
         it('should wait', function(done) {
             var waitTime = 100;

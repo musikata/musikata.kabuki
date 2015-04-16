@@ -43,7 +43,9 @@ var KabukiApp = Marionette.Application.extend({
     // when loading finishes, show 'next' button.
     $.when.apply($, loadPromises).then(() => {
       this.channel.trigger('loading:end');
-      this.scriptProcessor.processScript(this.script);
+      if (this.script) {
+          this.scriptProcessor.processScript(this.script);
+      }
     });
   },
 
