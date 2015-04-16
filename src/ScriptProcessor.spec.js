@@ -3,7 +3,7 @@ var $ = require('jquery');
 var ScriptProcessor = require('./ScriptProcessor');
 
 
-fdescribe('ScriptProcessor', function() {
+describe('ScriptProcessor', function() {
 
     class MockCommandHandler {
 
@@ -44,7 +44,7 @@ fdescribe('ScriptProcessor', function() {
 
     });
 
-    fit('should wait for blocking sequential commands', function(){
+    it('should wait for blocking sequential commands', function(){
         var scriptProcessor = generateScriptProcessor();
         var handler = scriptProcessor.commandHandler;
         spyOn(handler, 'handle').and.callThrough();
