@@ -5,21 +5,27 @@ var StageView = Marionette.LayoutView.extend({
     template: _.template(''),
     initialize: function(opts) {
         this.channel = opts.channel;
-        this.channel.reply('region:get', (regionOpts) => {
-            return this.getRegion('stage');
+
+        // Handle region commands.
+        this.channel.reply('region:add', this.addRegion, this);
+        this.channel.reply('region:remove', this.removeRegion, this);
+        this.channel.reply('region:get', (cmdOpts) => {
+            console.log('cmdOpts: ', cmdOpts);
+            return this.getRegion(cmdOpts.id);
         });
     },
 
     addRegion: function(opts) {
         var regionElId = this.cid + '-r-' + opts.id;
         this.$el.append('<div id="' + regionElId + '">');
-        Marionette.LayoutView.prototype.addRegion.apply(this, [opts.id, '#' + regionElId]);
+        return Marionette.LayoutView.prototype.addRegion.apply(this, [opts.id, '#' + regionElId]);
     },
 
     removeRegion: function(opts) {
         var $regionEl = this.getRegion(opts.id).$el;
-        Marionette.LayoutView.prototype.removeRegion.apply(this, [opts.id]);
+        var res = Marionette.LayoutView.prototype.removeRegion.apply(this, [opts.id]);
         $regionEl.remove();
+        return res;
     }
 });
 

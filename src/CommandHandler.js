@@ -28,7 +28,7 @@ class CommandHandler {
                 }
 
                 if (cmd.regionId) {
-                    var region = this.channel.request('region:get', cmd.regionId)
+                    var region = this.channel.request('region:get', {id: cmd.regionId})
                     region.show(widget);
                 }
 
@@ -38,6 +38,8 @@ class CommandHandler {
             }
         } else if (cmdParts[0] == 'service'){
             return this.plugins[cmd.pluginId].services[cmd.serviceId](cmd.serviceOpts);
+        } else if (cmdParts[0] == 'region'){
+            return this.channel.request(cmd.cmd, cmd.opts);
         }
     }
 }

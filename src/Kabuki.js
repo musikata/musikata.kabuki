@@ -34,10 +34,10 @@ var KabukiApp = Marionette.Application.extend({
     });
   },
 
-  onStart(options) {
+  onStart() {
     this.theatre.render();
 
-    this.showCurtains();
+    this.theatre.showCurtains({loadingImgSrc: this.options.loadingImgSrc});
 
     // start loading
     var loadPromises = [];
@@ -51,23 +51,12 @@ var KabukiApp = Marionette.Application.extend({
     // when loading finishes, show 'next' button.
     $.when.apply($, loadPromises).then(() => {
       this.channel.trigger('loading:end');
+      this.theatre.showStage();
       if (this.script) {
           this.scriptProcessor.processScript(this.script);
       }
     });
   },
-
-  showCurtains() {
-    // Show a loading view.
-    var loadingImgSrc = this.options.loadingImgSrc;
-    var LoadingView = Marionette.ItemView.extend({
-      template: _.template('<img src="' + loadingImgSrc + '"/>')
-    });
-    this.theatre.showChildView('stage', new LoadingView());
-  },
-
-  hideCurtains() {
-  }
 
 });
 

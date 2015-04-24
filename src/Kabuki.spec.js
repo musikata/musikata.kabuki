@@ -36,7 +36,7 @@ describe('Kabuki', function() {
         });
 
         it('should show the curtains', function() {
-          var spy = spyOn(ka, 'showCurtains');
+          var spy = spyOn(ka.theatre, 'showCurtains');
           ka.start();
           expect(spy).toHaveBeenCalled();
         });
