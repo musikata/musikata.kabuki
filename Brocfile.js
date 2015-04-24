@@ -26,7 +26,7 @@ manualTestTrees.static = pickFiles('manualTest', {
 
 var testAssetsTree = pickFiles('test_assets', {
     srcDir: '/',
-    files: ['**/*'],
+    files: ['**/*.*'],
     destDir: 'test_assets'
 });
 
