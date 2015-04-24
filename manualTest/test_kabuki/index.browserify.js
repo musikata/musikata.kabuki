@@ -3,6 +3,7 @@ var $ = require('jquery');
 var Kabuki = require('kabuki/src/Kabuki');
 var CorePlugin = require('kabuki/src/plugins/Core/Core');
 var BasicTextPlugin = require('kabuki/src/plugins/BasicText/BasicText');
+var ImagePlugin = require('kabuki/src/plugins/Image/Image');
 var AudioPlugin = require('kabuki/src/plugins/Audio/Audio');
 
 var audioCtx = require('kabuki/src//AudioManager/AudioContext');
@@ -29,8 +30,11 @@ var script = {
             widgetOpts: {audioManager: audioManager}},
         {cmd: 'widget:request', widgetId: 'audio1', request: 'playSample', requestOpts: {id: 'running-water'}},
         {cmd: 'region:add', opts: {id: 'textRegion'}},
+        {cmd: 'region:add', opts: {id: 'imageRegion'}},
         {cmd: 'widget:create', pluginId: 'Text', widgetClassId: 'TextWidget', widgetId: 'text1', regionId: 'textRegion'},
+        {cmd: 'widget:create', pluginId: 'Image', widgetClassId: 'ImageWidget', widgetId: 'image1', regionId: 'imageRegion'},
         {cmd: 'widget:request', widgetId: 'text1', request: 'showText', requestOpts: {text: 'Onegai Shimasu. Let us begin with music'}},
+        {cmd: 'widget:request', widgetId: 'image1', request: 'showImage', requestOpts: {uri: 'circle.gif'}},
         {cmd: 'service', pluginId: 'Core', serviceId: 'wait', serviceOpts: {time: 2000}},
         {cmd: 'widget:request', widgetId: 'text1', request: 'showText', requestOpts: {text: 'Listen.'}},
         {cmd: 'service', pluginId: 'Core', serviceId: 'wait', serviceOpts: {time: 2000}},
@@ -50,7 +54,8 @@ $(document).ready(function() {
         plugins: {
             'Core': CorePlugin,
             'Text': BasicTextPlugin,
-            'Audio': AudioPlugin
+            'Audio': AudioPlugin,
+            'Image': ImagePlugin
         },
         assetsToLoad: assetsToLoad
     });

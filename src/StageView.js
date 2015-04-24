@@ -10,7 +10,6 @@ var StageView = Marionette.LayoutView.extend({
         this.channel.reply('region:add', this.addRegion, this);
         this.channel.reply('region:remove', this.removeRegion, this);
         this.channel.reply('region:get', (cmdOpts) => {
-            console.log('cmdOpts: ', cmdOpts);
             return this.getRegion(cmdOpts.id);
         });
     },
