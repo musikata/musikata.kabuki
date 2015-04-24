@@ -16,8 +16,8 @@ var assetsToLoad = [
     {pluginId: 'Core', loaderId: 'Generic', loaderOpts: {
         handler: function() {
             return audioManager.loadSample({
-                id: 'testSample',
-                url: '/test_assets/test_audio.mp3'
+                id: 'running-water',
+                url: '/test_assets/ignore/Jason_Shaw_-_RUNNING_WATERS.mp3'
             });
         }
     }}
@@ -25,16 +25,14 @@ var assetsToLoad = [
 
 var script = {
     commands: [
-        {cmd: 'widget:create', pluginId: 'Text', widgetClassId: 'TextWidget', widgetId: 'text1', regionId: 'stage'},
-        {cmd: 'widget:request', widgetId: 'text1', request: 'showText', requestOpts: {text: 'This is the first text'}},
-        {cmd: 'service', pluginId: 'Core', serviceId: 'wait', serviceOpts: {time: 500}},
-        {cmd: 'widget:request', widgetId: 'text1', request: 'showText', requestOpts: {text: 'This is the second text'}},
-        {cmd: 'service', pluginId: 'Core', serviceId: 'wait', serviceOpts: {time: 500}},
         {cmd: 'widget:create', pluginId: 'Audio', widgetClassId: 'AudioWidget', widgetId: 'audio1', 
             widgetOpts: {audioManager: audioManager}},
-        {cmd: 'widget:request', widgetId: 'audio1', request: 'playSample', requestOpts: {id: 'testSample'}},
-        {cmd: 'service', pluginId: 'Core', serviceId: 'wait', serviceOpts: {time: 1000}},
-        {cmd: 'widget:request', widgetId: 'audio1', request: 'playSample', requestOpts: {id: 'testSample'}},
+        {cmd: 'widget:request', widgetId: 'audio1', request: 'playSample', requestOpts: {id: 'running-water'}},
+        {cmd: 'widget:create', pluginId: 'Text', widgetClassId: 'TextWidget', widgetId: 'text1', regionId: 'stage'},
+        {cmd: 'widget:request', widgetId: 'text1', request: 'showText', requestOpts: {text: 'Onegai Shimasu. Let us begin with music'}},
+        {cmd: 'service', pluginId: 'Core', serviceId: 'wait', serviceOpts: {time: 2000}},
+        {cmd: 'widget:request', widgetId: 'text1', request: 'showText', requestOpts: {text: 'Listen.'}},
+        {cmd: 'service', pluginId: 'Core', serviceId: 'wait', serviceOpts: {time: 2000}},
     ]
 };
 
