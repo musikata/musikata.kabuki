@@ -23,7 +23,7 @@ describe('ImageWidget', function() {
     expect(ImagePlugin.widgets.ImageWidget).toBeDefined();
   });
 
-  fit('should show an image', function() {
+  it('should show an image', function() {
     var iw = new ImagePlugin.widgets.ImageWidget({channel: channel});
     $container.append(iw.$el);
     iw.render();
