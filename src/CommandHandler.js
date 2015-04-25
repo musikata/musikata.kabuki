@@ -19,7 +19,8 @@ class CommandHandler {
         if (cmdParts[0] == 'widget') {
             var action = cmdParts[1];
             if (action == 'create') {
-                var widgetClass = this.plugins[cmd.pluginId].widgets[cmd.widgetClass];
+                var classParts = cmd.widgetClass.split(':');
+                var widgetClass = this.plugins[classParts[0]].widgets[classParts[1]];
                 var widgetChannel = Radio.channel(cmd.widgetId);
                 var widget = new widgetClass(Object.assign({channel: widgetChannel}, cmd.widgetOpts));
 
@@ -39,7 +40,8 @@ class CommandHandler {
                 return widgetChannel.request(cmd.req, cmd.opts);
             }
         } else if (cmdParts[0] == 'service'){
-            return this.plugins[cmd.pluginId].services[cmd.serviceId](cmd.opts);
+            var serviceParts = cmd.serviceId.split(':');
+            return this.plugins[serviceParts[0]].services[serviceParts[1]](cmd.opts);
         } else if (cmdParts[0] == 'region'){
             return this.channel.request(cmd.cmd, cmd.opts);
         }
