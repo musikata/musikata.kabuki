@@ -1,8 +1,12 @@
+/**
+ * TheatreLayoutView: main container for Kabuki regions.
+ **/
+var Radio = require('backbone.radio');
 var Marionette = require('kabuki/src/marionette-shim');
 var _ = require('underscore');
 
+var LayoutWidget = require('./plugins/Core/Core').widgets.LayoutWidget;
 var ControlsView = require('./ControlsView');
-var StageView = require('./StageView');
 
 
 var TheatreLayoutView = Marionette.LayoutView.extend({
@@ -31,7 +35,8 @@ var TheatreLayoutView = Marionette.LayoutView.extend({
     },
 
     showStage: function() {
-        this.showChildView('stage', new StageView({channel: this.channel}));
+        this.stage = new LayoutWidget({channel: Radio.channel('stage')});
+        this.showChildView('stage', this.stage);
     },
 });
 
