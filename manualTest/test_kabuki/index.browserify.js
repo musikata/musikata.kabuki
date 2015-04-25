@@ -28,17 +28,23 @@ var assetsToLoad = [
 
 var script = {
     commands: [
-        //{cmd: 'widget:create', pluginId: 'Audio', widgetClassId: 'AudioWidget', widgetId: 'audio1', 
+        //{cmd: 'widget:create', pluginId: 'Audio', widgetClass: 'AudioWidget', widgetId: 'audio1', 
             //widgetOpts: {audioManager: audioManager}},
         //{cmd: 'widget:request', widgetId: 'audio1', request: 'playSample', requestOpts: {id: 'running-water'}},
+
+        // Setup status region.
         {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'statusRegion'}},
+        {cmd: 'widget:create', pluginId: 'Core', widgetClass: 'LayoutWidget', widgetId: 'statusLayout', regionId: 'stage:statusRegion'},
+        {cmd: 'widget:request', widgetId: 'statusLayout', req: 'region:add', opts: {id: 'narratorRegion'}},
+        {cmd: 'widget:create', pluginId: 'Image', widgetClass: 'ImageWidget', 
+            widgetId: 'narratorImage', regionId: 'statusLayout:narratorRegion', widgetOpts: {uri: 'circle.gif'}},
+
+        // Setup text region.
         {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'textRegion'}},
-        {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'imageRegion'}},
-        {cmd: 'widget:create', pluginId: 'Core', widgetClassId: 'LayoutWidget', widgetId: 'statusBar', regionId: 'stage:statusRegion'},
-        {cmd: 'widget:create', pluginId: 'Text', widgetClassId: 'TextWidget', widgetId: 'text1', regionId: 'stage:textRegion'},
-        {cmd: 'widget:create', pluginId: 'Image', widgetClassId: 'ImageWidget', widgetId: 'image1', regionId: 'stage:imageRegion'},
+        {cmd: 'widget:create', pluginId: 'Text', widgetClass: 'TextWidget', widgetId: 'text1', regionId: 'stage:textRegion'},
+
+        // Start text.
         {cmd: 'widget:request', widgetId: 'text1', req: 'showText', opts: {text: 'Onegai Shimasu. Let us begin with music'}},
-        {cmd: 'widget:request', widgetId: 'image1', req: 'showImage', opts: {uri: 'circle.gif'}},
         {cmd: 'service', pluginId: 'Core', serviceId: 'wait', opts: {time: 2000}},
         {cmd: 'widget:request', widgetId: 'text1', req: 'showText', opts: {text: 'Listen.'}},
         {cmd: 'service', pluginId: 'Core', serviceId: 'wait', opts: {time: 2000}},

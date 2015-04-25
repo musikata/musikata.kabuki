@@ -11,6 +11,9 @@ var ImageWidget = Marionette.View.extend({
         this.channel.reply('showImage', (opts) => {
             this.showImage(opts.uri);
         });
+        if (opts.uri) {
+            this.showImage(opts.uri);
+        }
     },
 
     showImage: function(imageUri) {

@@ -19,7 +19,7 @@ class CommandHandler {
         if (cmdParts[0] == 'widget') {
             var action = cmdParts[1];
             if (action == 'create') {
-                var widgetClass = this.plugins[cmd.pluginId].widgets[cmd.widgetClassId];
+                var widgetClass = this.plugins[cmd.pluginId].widgets[cmd.widgetClass];
                 var widgetChannel = Radio.channel(cmd.widgetId);
                 var widget = new widgetClass(Object.assign({channel: widgetChannel}, cmd.widgetOpts));
 
