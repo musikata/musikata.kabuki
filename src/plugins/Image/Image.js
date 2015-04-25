@@ -6,6 +6,8 @@
 var Marionette = require('kabuki/src/marionette-shim');
 
 var ImageWidget = Marionette.View.extend({
+    tagName: 'img',
+
     initialize: function(opts) {
         this.channel = opts.channel;
         this.channel.reply('showImage', (opts) => {
@@ -17,7 +19,7 @@ var ImageWidget = Marionette.View.extend({
     },
 
     showImage: function(imageUri) {
-        this.$el.html('<img src="' + imageUri + '">');
+        this.$el.attr('src', imageUri);
     }
 });
 

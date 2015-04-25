@@ -24,13 +24,12 @@ class CommandHandler {
                 var widgetChannel = Radio.channel(cmd.widgetId);
                 var widget = new widgetClass(Object.assign({channel: widgetChannel}, cmd.widgetOpts));
 
-                this.widgetRegistry.registerWidget({
-                    id: cmd.widgetId, widget: widget, channel: widgetChannel});
+                this.widgetRegistry.registerWidget({id: cmd.widgetId, widget: widget});
 
                 if (cmd.regionId) {
                     var regionParts = cmd.regionId.split(':');
-                    var widgetId = regionParts[0];
-                    var widgetChannel = this.widgetRegistry.getWidget(widgetId).channel;
+                    var regionWidgetId = regionParts[0];
+                    var widgetChannel = this.widgetRegistry.getWidget(regionWidgetId).channel;
                     var region = widgetChannel.request('region:get', {id: regionParts[1]});
                     region.show(widget);
                 }

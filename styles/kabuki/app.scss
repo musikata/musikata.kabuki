@@ -24,3 +24,11 @@ body {
   height: 40px;
   border-top: thin solid #eee;
 }
+
+.status {
+    height: 2em;
+    background-color: #ccc;
+    .narrator img {
+        height: 100%;
+    }
+}

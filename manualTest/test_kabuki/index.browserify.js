@@ -32,22 +32,37 @@ var script = {
             //widgetOpts: {audioManager: audioManager}},
         //{cmd: 'widget:request', widgetId: 'audio1', request: 'playSample', requestOpts: {id: 'running-water'}},
 
+        // Show sensei and text.
+        {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'imageRegion'}},
+        {cmd: 'widget:create', widgetClass: 'Image:ImageWidget', 
+            widgetId: 'big-sensei', regionId: 'stage:imageRegion', widgetOpts: {uri: 'cricket_colored.svg'}},
+
+        {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'textRegion'}},
+        {cmd: 'widget:create', widgetClass: 'Text:TextWidget', widgetId: 'text1', regionId: 'stage:textRegion'},
+        {cmd: 'widget:request', widgetId: 'text1', req: 'showText', opts: {text: 'Onegai Shimasu'}},
+
+        {cmd: 'service', serviceId: 'Core:wait', opts: {time: 2000}},
+
+        {cmd: 'widget:request', widgetId: 'stage', req: 'region:remove', opts: {id: 'textRegion'}},
+        {cmd: 'widget:request', widgetId: 'stage', req: 'region:remove', opts: {id: 'imageRegion'}},
+
         // Setup status region.
         {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'statusRegion', className: 'status'}},
-        {cmd: 'widget:create', pluginId: 'Core', widgetClass: 'LayoutWidget', widgetId: 'statusLayout', regionId: 'stage:statusRegion'},
-        {cmd: 'widget:request', widgetId: 'statusLayout', req: 'region:add', opts: {id: 'narratorRegion'}},
-        {cmd: 'widget:create', pluginId: 'Image', widgetClass: 'ImageWidget', 
-            widgetId: 'narratorImage', regionId: 'statusLayout:narratorRegion', widgetOpts: {uri: 'circle.gif'}},
+        {cmd: 'widget:create', widgetClass: 'Core:LayoutWidget', 
+            widgetId: 'statusLayout', regionId: 'stage:statusRegion', widgetOpts: {className: 'status-layout'}},
+        {cmd: 'widget:request', widgetId: 'statusLayout', req: 'region:add', opts: {id: 'narratorRegion', className: 'narrator'}},
+        {cmd: 'widget:create', widgetClass: 'Image:ImageWidget', 
+            widgetId: 'narratorImage', regionId: 'statusLayout:narratorRegion', widgetOpts: {uri: 'cricket-head-optimized.svg'}},
 
         // Setup text region.
         {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'textRegion'}},
-        {cmd: 'widget:create', pluginId: 'Text', widgetClass: 'TextWidget', widgetId: 'text1', regionId: 'stage:textRegion'},
+        {cmd: 'widget:create', widgetClass: 'Text:TextWidget', widgetId: 'text1', regionId: 'stage:textRegion'},
 
         // Start text.
-        {cmd: 'widget:request', widgetId: 'text1', req: 'showText', opts: {text: 'Onegai Shimasu. Let us begin with music'}},
-        {cmd: 'service', pluginId: 'Core', serviceId: 'wait', opts: {time: 2000}},
+        {cmd: 'widget:request', widgetId: 'text1', req: 'showText', opts: {text: 'Let us begin with music'}},
+        {cmd: 'service', serviceId: 'Core:wait', opts: {time: 2000}},
         {cmd: 'widget:request', widgetId: 'text1', req: 'showText', opts: {text: 'Listen.'}},
-        {cmd: 'service', pluginId: 'Core', serviceId: 'wait', opts: {time: 2000}},
+        {cmd: 'service', serviceId: 'Core:wait', opts: {time: 2000}},
     ]
 };
 

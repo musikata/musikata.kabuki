@@ -20,7 +20,7 @@ var manualTestTrees = {};
 
 manualTestTrees.static = pickFiles('manualTest', {
   srcDir: '/',
-  files: ['**/*.html', '**/*.gif'],
+  files: ['**/*.html', '**/*.gif', '**/*.svg'],
   destDir: 'manualTest'
 });
 
