@@ -76,6 +76,20 @@ describe('Core Plugins', function() {
             channel.request('region:remove', {id: 'a'});
             expect(Object.keys(channel.request('region:get')).sort()).toEqual(['b']);
         });
+
+        it('can animate regions', function(done) {
+            var lw = generateLayoutWidget();
+            channel.request('region:add', {id: 'a'});
+            var promise = channel.request('region:animate', {id: 'a',
+                props: {opacity: .5},
+                opts: {}
+            });
+            promise.then(function() {
+                var region = channel.request('region:get', {id: 'a'});
+                expect(parseFloat(region.$el.css('opacity'))).toEqual(.5);
+                done();
+            });
+        });
     })
 });
 

@@ -33,15 +33,25 @@ var script = {
         //{cmd: 'widget:request', widgetId: 'audio1', request: 'playSample', requestOpts: {id: 'running-water'}},
 
         // Show sensei and text.
-        {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'imageRegion'}},
+        {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'imageRegion', style: {opacity: 0}}},
         {cmd: 'widget:create', widgetClass: 'Image:ImageWidget', 
             widgetId: 'big-sensei', regionId: 'stage:imageRegion', widgetOpts: {uri: 'cricket_colored.svg'}},
 
-        {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'textRegion'}},
+        {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'textRegion', style: {opacity: 0}}},
         {cmd: 'widget:create', widgetClass: 'Text:TextWidget', widgetId: 'text1', regionId: 'stage:textRegion'},
         {cmd: 'widget:request', widgetId: 'text1', req: 'showText', opts: {text: 'Onegai Shimasu'}},
 
+        {cmd: 'widget:request', widgetId: 'stage', req: 'region:animate', opts: {
+            id: 'textRegion', props: {opacity: 1}, opts: {duration: 1000}}},
+        {cmd: 'widget:request', widgetId: 'stage', req: 'region:animate', opts: {
+            id: 'imageRegion', props: {opacity: 1}, opts: {duration: 1000}}},
+
         {cmd: 'service', serviceId: 'Core:wait', opts: {time: 2000}},
+
+        {cmd: 'widget:request', widgetId: 'stage', req: 'region:animate', opts: {
+            id: 'textRegion', props: {opacity: 0}, opts: {duration: 1000}}},
+        {cmd: 'widget:request', widgetId: 'stage', req: 'region:animate', opts: {
+            id: 'imageRegion', props: {opacity: 0}, opts: {duration: 1000}}},
 
         {cmd: 'widget:request', widgetId: 'stage', req: 'region:remove', opts: {id: 'textRegion'}},
         {cmd: 'widget:request', widgetId: 'stage', req: 'region:remove', opts: {id: 'imageRegion'}},

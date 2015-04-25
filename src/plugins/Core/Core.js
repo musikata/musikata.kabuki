@@ -35,12 +35,15 @@ var LayoutWidget = Marionette.LayoutView.extend({
         // Handle region commands.
         this.channel.reply('region:add', this.addRegion, this);
         this.channel.reply('region:remove', this.removeRegion, this);
+
         this.channel.reply('region:get', (cmdOpts) => {
             if (! cmdOpts || ! cmdOpts.id) {
                 return this.regionManager.getRegions();
             }
             return this.getRegion(cmdOpts.id);
         });
+
+        this.channel.reply('region:animate', this.animateRegion, this);
     },
 
     addRegion: function(opts) {
@@ -59,6 +62,11 @@ var LayoutWidget = Marionette.LayoutView.extend({
         var res = Marionette.LayoutView.prototype.removeRegion.apply(this, [opts.id]);
         $regionEl.remove();
         return res;
+    },
+
+    animateRegion: function(opts) {
+        var region = this.getRegion(opts.id);
+        return region.$el.animate(opts.props, opts.opts).promise();
     }
 });
 
