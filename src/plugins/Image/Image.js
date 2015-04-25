@@ -3,10 +3,7 @@
 * Probably not that useful, mainly here to test out architecture ideas.
 **/
 
-var $ = require('jquery');
-var Backbone = require('backbone');
-Backbone.$ = $;
-var Marionette = require('backbone.marionette');
+var Marionette = require('kabuki/src/marionette-shim');
 
 var ImageWidget = Marionette.View.extend({
     initialize: function(opts) {
