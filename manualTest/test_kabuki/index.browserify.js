@@ -33,7 +33,7 @@ var script = {
         //{cmd: 'widget:request', widgetId: 'audio1', request: 'playSample', requestOpts: {id: 'running-water'}},
 
         // Setup status region.
-        {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'statusRegion'}},
+        {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'statusRegion', className: 'status'}},
         {cmd: 'widget:create', pluginId: 'Core', widgetClass: 'LayoutWidget', widgetId: 'statusLayout', regionId: 'stage:statusRegion'},
         {cmd: 'widget:request', widgetId: 'statusLayout', req: 'region:add', opts: {id: 'narratorRegion'}},
         {cmd: 'widget:create', pluginId: 'Image', widgetClass: 'ImageWidget', 

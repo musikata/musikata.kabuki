@@ -45,7 +45,9 @@ var LayoutWidget = Marionette.LayoutView.extend({
 
     addRegion: function(opts) {
         var regionElId = this.cid + '-r-' + opts.id;
-        this.$el.append('<div id="' + regionElId + '">');
+        var classAttr = opts.className ? 'class="' + opts.className + '"' : '';
+        var regionHtml = '<div id="' + regionElId + '"' + classAttr + '>';
+        this.$el.append(regionHtml);
         return Marionette.LayoutView.prototype.addRegion.apply(this, [opts.id, '#' + regionElId]);
     },
 
