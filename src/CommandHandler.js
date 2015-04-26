@@ -3,6 +3,7 @@
 * @TODO: Flesh this out!
 **/
 
+var $ = require('jquery');
 var Radio = require('backbone.radio');
 
 class CommandHandler {
@@ -43,6 +44,12 @@ class CommandHandler {
             return this.plugins[serviceParts[0]].services[serviceParts[1]](cmd.opts);
         } else if (cmdParts[0] == 'region'){
             return this.channel.request(cmd.cmd, cmd.opts);
+        } else if(cmdParts[0] == 'batch') {
+            var promises = [];
+            for (var i=0; i < cmd.cmds.length; i++) {
+                promises.push(this.handle(cmd.cmds[i]));
+            }
+            return $.when.apply($, promises);
         }
     }
 }
