@@ -43,10 +43,10 @@ var script = {
 
         {cmd: 'batch', cmds: [
             {cmd: 'widget:request', widgetId: 'stage', req: 'region:animate', opts: {
-                id: 'textRegion', props: {opacity: 1}, opts: {duration: 1000}}
+                id: 'textRegion', props: {opacity: 1}, opts: {duration: 2000}}
             },
             {cmd: 'widget:request', widgetId: 'stage', req: 'region:animate', opts: {
-                    id: 'imageRegion', props: {opacity: 1}, opts: {duration: 1000}}
+                    id: 'imageRegion', props: {opacity: 1}, opts: {duration: 2000}}
             },
             ]
         },
@@ -67,12 +67,22 @@ var script = {
         {cmd: 'widget:request', widgetId: 'stage', req: 'region:remove', opts: {id: 'imageRegion'}},
 
         // Setup status region.
-        {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'statusRegion', className: 'status'}},
-        {cmd: 'widget:create', widgetClass: 'Core:LayoutWidget', 
-            widgetId: 'statusLayout', regionId: 'stage:statusRegion', widgetOpts: {className: 'status-layout'}},
-        {cmd: 'widget:request', widgetId: 'statusLayout', req: 'region:add', opts: {id: 'narratorRegion', className: 'narrator'}},
+        {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'statusRegion', className: 'status', style: {opacity: 0}}},
+        {
+            cmd: 'widget:create', widgetClass: 'Core:LayoutWidget', 
+            widgetId: 'statusLayout', regionId: 'stage:statusRegion', widgetOpts: {className: 'status-layout'}
+        },
+        {cmd: 'widget:request', widgetId: 'stage', req: 'region:animate', opts: {
+            id: 'statusRegion', props: {opacity: 1}, opts: {duration: 1000}}
+        },
+
+        {cmd: 'widget:request', widgetId: 'statusLayout', req: 'region:add', opts: {id: 'narratorRegion', className: 'narrator', style: {opacity: 0}}
+        },
         {cmd: 'widget:create', widgetClass: 'Image:ImageWidget', 
             widgetId: 'narratorImage', regionId: 'statusLayout:narratorRegion', widgetOpts: {uri: 'cricket-head-optimized.svg'}},
+        {cmd: 'widget:request', widgetId: 'statusLayout', req: 'region:animate', opts: {
+            id: 'narratorRegion', props: {opacity: 1}, opts: {duration: 2000}}
+        },
 
         // Setup text region.
         {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'textRegion'}},
