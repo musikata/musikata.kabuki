@@ -50,10 +50,10 @@ var TheatreLayoutView = Marionette.LayoutView.extend({
     },
 
     toggleSettingsView: function() {
-        if (this.regions.settings.hasView()) {
-            this.showChildView('settings', this.getSettingsView());
+        if (this.getRegion('settings').hasView()) {
+            this.getRegion('settings').empty();
         } else {
-            this.regions.settings.empty();
+            this.showChildView('settings', this.getSettingsView());
         }
     }
 });
