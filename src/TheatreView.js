@@ -51,7 +51,7 @@ var TheatreLayoutView = Marionette.LayoutView.extend({
 
     toggleSettingsView: function() {
         if (this.getRegion('settings').hasView()) {
-            this.getRegion('settings').empty();
+            this.getRegion('settings').empty({preventDestroy: true});
         } else {
             this.showChildView('settings', this.getSettingsView());
         }
