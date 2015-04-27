@@ -11,14 +11,24 @@ var ControlsView = require('./ControlsView');
 
 var TheatreLayoutView = Marionette.LayoutView.extend({
     className: 'kb-theatre',
-    template: _.template('<div class="kb-stage"></div><div class="kb-controls"></div>'),
+    template: _.template('<div class="kb-stage"></div>' + 
+        '<div class="kb-settings"></div>' + 
+        '<div class="kb-controls"></div>'
+    ),
     regions: {
         stage: '.kb-stage',
-        controls: '.kb-controls'
+        controls: '.kb-controls',
+        settings: '.kb-settings'
     },
 
     initialize: function(opts) {
         this.channel = opts.channel;
+
+        // @TODO: clean this up later.
+        this.getSettingsView = opts.getSettingsView || function() {
+            var SettingsView = Marionette.ItemView.extend({template: _.template("no settings")});
+            return new SettingsView();
+        };
     },
 
     onRender: function() {
@@ -38,6 +48,14 @@ var TheatreLayoutView = Marionette.LayoutView.extend({
         this.stage = new LayoutWidget({channel: Radio.channel('stage')});
         this.showChildView('stage', this.stage);
     },
+
+    toggleSettingsView: function() {
+        if (this.regions.settings.hasView()) {
+            this.showChildView('settings', this.getSettingsView());
+        } else {
+            this.regions.settings.empty();
+        }
+    }
 });
 
 module.exports = TheatreLayoutView;

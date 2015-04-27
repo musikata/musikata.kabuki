@@ -6,7 +6,7 @@ var _ = require('underscore');
 var $ = require('jquery');
 var Marionette = require('./marionette-shim');
 
-var TheatreLayoutView = require('./TheatreLayoutView');
+var TheatreView = require('./TheatreView');
 var ScriptProcessor = require('./ScriptProcessor');
 var WidgetRegistry = require('./WidgetRegistry');
 var CommandHandler = require('./CommandHandler');
@@ -32,7 +32,7 @@ var KabukiApp = Marionette.Application.extend({
 
         this.scriptProcessor = new ScriptProcessor({commandHandler: this.commandHandler});
 
-        this.theatre = new TheatreLayoutView({
+        this.theatre = new TheatreView({
             el: opts.el,
             channel: this.channel
         });
