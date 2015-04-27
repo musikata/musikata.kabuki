@@ -1,5 +1,6 @@
 var $ = require('jquery');
 var _ = require('underscore');
+var Radio = require('backbone.radio');
 var Marionette = require('./marionette-shim');
 
 var TheatreView = require('./TheatreView');
@@ -8,23 +9,27 @@ var TheatreView = require('./TheatreView');
 describe('TheatreView', function() {
     var $container;
     var ka;
+    var channel;
 
     beforeEach(function() {
         $container = $('<div>');
         $('body').append($container);
+        channel = Radio.channel('test-TheatreView');
     });
 
     afterEach(function() {
         $container.remove();
+        channel.reset();
     });
 
     function generateTheatreView(opts) {
-        var tv = new TheatreView(Object.assign({el: $container}, opts));
+        var tv = new TheatreView(Object.assign({
+            el: $container, channel: channel}, opts));
         tv.render();
         return tv;
     };
 
-    fit('should show settings', function() {
+    it('should show settings', function() {
         var TestSettingsView = Marionette.ItemView.extend({template: _.template('FOO')});
         var settingsView = new TestSettingsView();
 

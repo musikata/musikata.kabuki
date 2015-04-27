@@ -11,8 +11,9 @@ var ControlsView = require('./ControlsView');
 
 var TheatreLayoutView = Marionette.LayoutView.extend({
     className: 'kb-theatre',
-    template: _.template('<div class="kb-stage"></div>' + 
+    template: _.template('' +
         '<div class="kb-settings"></div>' + 
+        '<div class="kb-stage"></div>' + 
         '<div class="kb-controls"></div>'
     ),
     regions: {
@@ -29,6 +30,8 @@ var TheatreLayoutView = Marionette.LayoutView.extend({
             var SettingsView = Marionette.ItemView.extend({template: _.template("no settings")});
             return new SettingsView();
         };
+
+        this.channel.reply('toggleSettings', this.toggleSettingsView, this);
     },
 
     onRender: function() {

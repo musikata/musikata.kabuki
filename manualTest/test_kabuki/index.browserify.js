@@ -31,7 +31,7 @@ var script = {
         //{cmd: 'widget:create', pluginId: 'Audio', widgetClass: 'AudioWidget', widgetId: 'audio1', 
             //widgetOpts: {audioManager: audioManager}},
         //{cmd: 'widget:request', widgetId: 'audio1', request: 'playSample', requestOpts: {id: 'running-water'}},
-
+        
         // Show sensei and text.
         {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'imageRegion', style: {opacity: 0}}},
         {cmd: 'widget:create', widgetClass: 'Image:ImageWidget', 

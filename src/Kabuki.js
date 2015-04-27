@@ -24,18 +24,25 @@ var KabukiApp = Marionette.Application.extend({
         
         this.widgetRegistry = opts.widgetRegistry || new WidgetRegistry();
 
-        this.commandHandler = opts.commandHandler || new CommandHandler({
-            channel: this.channel,
-            plugins: this.plugins,
-            widgetRegistry: this.widgetRegistry
-        });
-
-        this.scriptProcessor = new ScriptProcessor({commandHandler: this.commandHandler});
+        // @TODO: flesh out settings!
+        var settingsView = new (Marionette.ItemView.extend({
+            template: _.template('TMP SETTINGS')
+        }))();
 
         this.theatre = new TheatreView({
             el: opts.el,
-            channel: this.channel
+            channel: this.channel,
+            getSettingsView: function() {return settingsView}
         });
+
+        this.commandHandler = opts.commandHandler || new CommandHandler({
+            channel: this.channel,
+            plugins: this.plugins,
+            widgetRegistry: this.widgetRegistry,
+            theatreChannel: this.theatre.channel
+        });
+
+        this.scriptProcessor = new ScriptProcessor({commandHandler: this.commandHandler});
     },
 
     onStart() {

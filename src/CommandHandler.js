@@ -11,6 +11,9 @@ class CommandHandler {
         this.channel = opts.channel;
         this.plugins = opts.plugins;
         this.widgetRegistry = opts.widgetRegistry;
+
+        // @TODO: later, should probably decouple theatre from commandhandler.
+        this.theatreChannel = opts.theatreChannel;
     }
 
     handle(cmd) {
@@ -50,6 +53,12 @@ class CommandHandler {
                 promises.push(this.handle(cmd.cmds[i]));
             }
             return $.when.apply($, promises);
+        } else if(cmdParts[0] == 'theatre') {
+            // @TODO: decouple theatre later, so that
+            // we don't need to keep direct reference here.
+            cmdParts.shift();
+            var theatreCmd = cmdParts.join(':');
+            return this.theatreChannel.request(theatreCmd, cmd.opts);
         }
     }
 }
