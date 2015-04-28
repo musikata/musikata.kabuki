@@ -41,6 +41,7 @@ var KabukiApp = Marionette.Application.extend({
             widgetRegistry: this.widgetRegistry,
             theatreChannel: this.theatre.channel
         });
+        this.channel.on('cmd', this.commandHandler.handle, this.commandHandler);
 
         this.scriptProcessor = new ScriptProcessor({commandHandler: this.commandHandler});
     },

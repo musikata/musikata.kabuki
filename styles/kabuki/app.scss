@@ -28,7 +28,15 @@ body {
 .status {
     height: 2em;
     background-color: #ccc;
-    .narrator img {
-        height: 100%;
+
+    .narrator {
+        float: left;
+        img {
+            height: 100%;
+        }
+    }
+
+    .settings-launcher {
+        float: right;
     }
 }

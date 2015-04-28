@@ -9,6 +9,7 @@ var Radio = require('backbone.radio');
 class CommandHandler {
     constructor(opts) {
         this.channel = opts.channel;
+        this.broadcastChannel = this.channel;
         this.plugins = opts.plugins;
         this.widgetRegistry = opts.widgetRegistry;
 
@@ -26,7 +27,10 @@ class CommandHandler {
                 var classParts = cmd.widgetClass.split(':');
                 var widgetClass = this.plugins[classParts[0]].widgets[classParts[1]];
                 var widgetChannel = Radio.channel(cmd.widgetId);
-                var widget = new widgetClass(Object.assign({channel: widgetChannel}, cmd.widgetOpts));
+                var mergedWidgetOpts = Object.assign({
+                    broadcastChannel: this.broadcastChannel, channel: widgetChannel
+                }, cmd.widgetOpts);
+                var widget = new widgetClass(mergedWidgetOpts);
 
                 this.widgetRegistry.registerWidget({id: cmd.widgetId, widget: widget});
 
@@ -59,6 +63,8 @@ class CommandHandler {
             cmdParts.shift();
             var theatreCmd = cmdParts.join(':');
             return this.theatreChannel.request(theatreCmd, cmd.opts);
+        } else if(cmdParts[0] == 'debug') {
+            console.log('debug', cmd);
         }
     }
 }

@@ -33,6 +33,7 @@ var script = {
         //{cmd: 'widget:request', widgetId: 'audio1', request: 'playSample', requestOpts: {id: 'running-water'}},
         
         // Show sensei and text.
+        /*
         {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'imageRegion', style: {opacity: 0}}},
         {cmd: 'widget:create', widgetClass: 'Image:ImageWidget', 
             widgetId: 'big-sensei', regionId: 'stage:imageRegion', widgetOpts: {uri: 'cricket_colored.svg'}},
@@ -65,6 +66,7 @@ var script = {
 
         {cmd: 'widget:request', widgetId: 'stage', req: 'region:remove', opts: {id: 'textRegion'}},
         {cmd: 'widget:request', widgetId: 'stage', req: 'region:remove', opts: {id: 'imageRegion'}},
+        */
 
         // Setup status region.
         {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'statusRegion', className: 'status', style: {opacity: 0}}},
@@ -76,6 +78,7 @@ var script = {
             id: 'statusRegion', props: {opacity: 1}, opts: {duration: 1000}}
         },
 
+        // Status:narrator.
         {cmd: 'widget:request', widgetId: 'statusLayout', req: 'region:add', opts: {id: 'narratorRegion', className: 'narrator', style: {opacity: 0}}
         },
         {cmd: 'widget:create', widgetClass: 'Image:ImageWidget', 
@@ -83,6 +86,13 @@ var script = {
         {cmd: 'widget:request', widgetId: 'statusLayout', req: 'region:animate', opts: {
             id: 'narratorRegion', props: {opacity: 1}, opts: {duration: 2000}}
         },
+
+        // Status: settings launcher.
+        {cmd: 'widget:request', widgetId: 'statusLayout', req: 'region:add', opts: {id: 'settingsLauncherRegion', className: 'settings-launcher'}},
+        {cmd: 'widget:create', widgetClass: 'Text:TextWidget', widgetId: 'settingsLauncher', regionId: 'statusLayout:settingsLauncherRegion',
+            widgetOpts: {cmdTriggers: {'click': {cmd: 'theatre:toggleSettings'}}}
+        },
+        {cmd: 'widget:request', widgetId: 'settingsLauncher', req: 'showText', opts: {text: 'S'}},
 
         // Setup text region.
         {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'textRegion'}},
