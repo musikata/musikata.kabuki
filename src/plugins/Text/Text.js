@@ -31,7 +31,7 @@ var TextWidget = Marionette.View.extend({
 });
 
 module.exports = {
-    pluginId: 'BasicText',
+    pluginId: 'Text',
     widgets: {
         'TextWidget': TextWidget
     }

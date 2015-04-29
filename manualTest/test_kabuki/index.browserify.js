@@ -2,7 +2,7 @@ require("babelify/polyfill");
 var $ = require('jquery');
 var Kabuki = require('kabuki/src/Kabuki');
 var CorePlugin = require('kabuki/src/plugins/Core/Core');
-var BasicTextPlugin = require('kabuki/src/plugins/BasicText/BasicText');
+var TextPlugin = require('kabuki/src/plugins/Text/Text');
 var ImagePlugin = require('kabuki/src/plugins/Image/Image');
 var AudioPlugin = require('kabuki/src/plugins/Audio/Audio');
 
@@ -120,7 +120,7 @@ $(document).ready(function() {
         script: script,
         plugins: {
             'Core': CorePlugin,
-            'Text': BasicTextPlugin,
+            'Text': TextPlugin,
             'Audio': AudioPlugin,
             'Image': ImagePlugin
         },
