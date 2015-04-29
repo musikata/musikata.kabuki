@@ -4,12 +4,14 @@
 
 var _ = require('underscore');
 var $ = require('jquery');
+var Backbone = require('backbone');
 var Marionette = require('./marionette-shim');
 
 var TheatreView = require('./TheatreView');
 var ScriptProcessor = require('./ScriptProcessor');
 var WidgetRegistry = require('./WidgetRegistry');
 var CommandHandler = require('./CommandHandler');
+var SettingsView = require('./SettingsView');
 
 
 var Kabuki = {};
@@ -24,9 +26,17 @@ var KabukiApp = Marionette.Application.extend({
         
         this.widgetRegistry = opts.widgetRegistry || new WidgetRegistry();
 
+        var settings = new Backbone.Model();
+        this.settings = settings;
+
         this.theatre = new TheatreView({
             el: opts.el,
             channel: this.channel,
+            getSettingsView: function() {
+                return new SettingsView({
+                    model: settings
+                });
+            }
         });
 
         this.commandHandler = opts.commandHandler || new CommandHandler({
