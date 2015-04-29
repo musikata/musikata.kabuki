@@ -30,6 +30,12 @@ var testAssetsTree = pickFiles('test_assets', {
     destDir: 'test_assets'
 });
 
+var jqueryUiThemeTree = pickFiles('node_modules/jquery-ui/themes', {
+    srcDir: '/',
+    files: ['**/*.*'],
+    destDir: 'jquery-ui-themes'
+});
+
 manualTestTrees.js = fastBrowserify(mergeTrees([srcTree, 'manualTest']), {
   bundles: {
     "**/index.browserify.js": {
@@ -51,5 +57,6 @@ module.exports = mergeTrees([
   sassTree,
   manualTestTrees.static, 
   manualTestTrees.js,
-  testAssetsTree
+  testAssetsTree,
+  jqueryUiThemeTree
 ]);

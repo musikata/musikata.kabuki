@@ -24,15 +24,9 @@ var KabukiApp = Marionette.Application.extend({
         
         this.widgetRegistry = opts.widgetRegistry || new WidgetRegistry();
 
-        // @TODO: flesh out settings!
-        var settingsView = new (Marionette.ItemView.extend({
-            template: _.template('TMP SETTINGS')
-        }))();
-
         this.theatre = new TheatreView({
             el: opts.el,
             channel: this.channel,
-            getSettingsView: function() {return settingsView}
         });
 
         this.commandHandler = opts.commandHandler || new CommandHandler({

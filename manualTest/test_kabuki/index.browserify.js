@@ -68,6 +68,8 @@ var script = {
         {cmd: 'widget:request', widgetId: 'stage', req: 'region:remove', opts: {id: 'imageRegion'}},
         */
 
+        {cmd: 'theatre:toggleSettings'},
+
         // Setup status region.
         {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'statusRegion', className: 'status', style: {opacity: 0}}},
         {

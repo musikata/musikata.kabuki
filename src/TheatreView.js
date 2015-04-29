@@ -7,6 +7,7 @@ var _ = require('underscore');
 
 var LayoutWidget = require('./plugins/Core/Core').widgets.LayoutWidget;
 var ControlsView = require('./ControlsView');
+var SettingsView = require('./SettingsView');
 
 
 var TheatreLayoutView = Marionette.LayoutView.extend({
@@ -27,7 +28,6 @@ var TheatreLayoutView = Marionette.LayoutView.extend({
 
         // @TODO: clean this up later.
         this.getSettingsView = opts.getSettingsView || function() {
-            var SettingsView = Marionette.ItemView.extend({template: _.template("no settings")});
             return new SettingsView();
         };
 
