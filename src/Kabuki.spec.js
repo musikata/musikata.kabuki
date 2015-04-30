@@ -63,5 +63,22 @@ describe('Kabuki', function() {
 
       });
 
+      describe('settings', function() {
+          beforeEach(function() {
+              ka = generateKabukiApp();
+          });
+
+          it('should set settings', function() {
+              ka.channel.request('settings:set', {foo: 'bar'});
+              expect(ka.settings.get('foo')).toEqual('bar');
+          });
+
+          it('should get settings', function() {
+              ka.channel.request('settings:set', {foo: 'bar'});
+              var settings = ka.channel.request('settings:get');
+              expect(settings.foo).toEqual('bar');
+          });
+      });
+
     });
 });

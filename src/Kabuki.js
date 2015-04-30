@@ -26,7 +26,9 @@ var KabukiApp = Marionette.Application.extend({
         
         this.widgetRegistry = opts.widgetRegistry || new WidgetRegistry();
 
-        var settings = new Backbone.Model();
+        var settings = new Backbone.Model({
+            textSpeed: 400
+        });
         this.settings = settings;
 
         this.theatre = new TheatreView({
@@ -46,6 +48,9 @@ var KabukiApp = Marionette.Application.extend({
             theatreChannel: this.theatre.channel
         });
         this.channel.on('cmd', this.commandHandler.handle, this.commandHandler);
+
+        this.channel.reply('settings:get', this.getSettings, this);
+        this.channel.reply('settings:set', this.setSettings, this);
 
         this.scriptProcessor = new ScriptProcessor({commandHandler: this.commandHandler});
     },
@@ -82,6 +87,14 @@ var KabukiApp = Marionette.Application.extend({
             }
         });
     },
+
+    getSettings: function() {
+        return this.settings.toJSON();
+    },
+
+    setSettings: function(newValues) {
+        this.settings.set(newValues);
+    }
 
 });
 
