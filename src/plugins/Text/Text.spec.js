@@ -7,9 +7,11 @@ describe('TextWidget', function() {
 
   var $container;
   var channel;
+  var broadcastChannel;
 
   beforeEach(function() {
-    channel = Radio.channel('test');
+    channel = Radio.channel('test-Text');
+    broadcastChannel = Radio.channel('test-broadcast-Text');
     $container = $('<div>');
     $('body').append($container);
   });
@@ -24,7 +26,10 @@ describe('TextWidget', function() {
   });
 
   it('should show text', function(done) {
-    var tw = new Text.widgets.TextWidget({channel: channel});
+    var tw = new Text.widgets.TextWidget({
+        channel: channel,
+        broadcastChannel: broadcastChannel
+    });
     $container.append(tw.$el);
     tw.render();
     var testText = 'The canteloupe is the queen of fruits.';

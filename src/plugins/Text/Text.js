@@ -18,6 +18,7 @@ var TextWidget = Marionette.View.extend({
             this.showText(opts.text);
         });
 
+        // Tmp hack for actions. Should probably do this as a mixin for all widgets later.
         _.each(this.cmdTriggers, function(cmd, event) {
             this.$el.on(event, () => {
                 this.broadcastChannel.trigger('cmd', cmd);
@@ -29,7 +30,12 @@ var TextWidget = Marionette.View.extend({
     showText: function(txt) {
         // @TODO: get this from settings.
         var dfd = new $.Deferred();
-        var txtSpeed = 400;
+        var envSettings = this.broadcastChannel.request('settings:get');
+        var txtSpeed = 10;
+        if (envSettings && ! _.isUndefined(envSettings.textSpeed)) {
+            txtSpeed = envSettings.textSpeed;
+        }
+
         this.$el.empty();
         var words = txt.split(' ');
 
