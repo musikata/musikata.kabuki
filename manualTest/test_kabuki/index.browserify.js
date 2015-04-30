@@ -102,9 +102,7 @@ var script = {
 
         // Start text.
         {cmd: 'widget:request', widgetId: 'text1', req: 'showText', opts: {text: 'Let us begin with music'}},
-        {cmd: 'service', serviceId: 'Core:wait', opts: {time: 2000}},
         {cmd: 'widget:request', widgetId: 'text1', req: 'showText', opts: {text: 'Listen.'}},
-        {cmd: 'service', serviceId: 'Core:wait', opts: {time: 2000}},
     ]
 };
 

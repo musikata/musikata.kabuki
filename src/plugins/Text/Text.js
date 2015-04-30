@@ -36,29 +36,38 @@ var TextWidget = Marionette.View.extend({
         var words = opts.text.split(' ');
 
         var _showNextWord = () => {
-            var envSettings = this.broadcastChannel.request('settings:get') || {};
 
+            // Get settings.
+            var settings = _.defaults({}, opts, this.options, 
+                this.broadcastChannel.request('settings:get'));
 
             if (words.length == 0) {
-                if (opts.autoAdvance || this.autoAdvance || envSettings.autoAdvance) {
-                    dfd.resolve();
+                var advance = function() {
+                    if (!settings.advanceDelay) {
+                        dfd.resolve();
+                        return;
+                    }
+                    setTimeout(function(){dfd.resolve()}, settings.advanceDelay);
+                };
+
+                if (settings.autoAdvance) {
+                    advance();
                 } else {
                     var $nextButton = $('<span class="button tiny">&gt;</span>');
                     this.$el.append($nextButton);
                     $nextButton.on('click', function() {
                         $nextButton.remove();
-                        dfd.resolve();
+                        advance();
                     });
                 }
                 return;
             }
 
-            var txtSpeed = opts.textSpeed || envSettings.textSpeed || 10;
 
             var nextWord = words.shift();
             var $wordEl = $('<span style="opacity:0;">').html(' ' + nextWord);
             $wordEl.appendTo(this.$el).fadeTo(400, 1);
-            setTimeout(_showNextWord, txtSpeed);
+            setTimeout(_showNextWord, settings.textSpeed);
         };
 
         _showNextWord();
