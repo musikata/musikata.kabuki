@@ -94,7 +94,7 @@ var script = {
         {cmd: 'widget:create', widgetClass: 'Text:TextWidget', widgetId: 'settingsLauncher', regionId: 'statusLayout:settingsLauncherRegion',
             widgetOpts: {cmdTriggers: {'click': {cmd: 'theatre:toggleSettings'}}}
         },
-        {cmd: 'widget:request', widgetId: 'settingsLauncher', req: 'showText', opts: {text: 'S'}},
+        {cmd: 'widget:request', widgetId: 'settingsLauncher', req: 'showText', opts: {text: 'S', autoAdvance: true}},
 
         // Setup text region.
         {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'textRegion'}},

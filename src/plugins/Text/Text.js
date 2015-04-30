@@ -16,7 +16,7 @@ var TextWidget = Marionette.View.extend({
         this.autoAdvance = opts.autoAdvance;
 
         this.channel.reply('showText', (opts) => {
-            return this.showText(opts.text);
+            return this.showText(opts);
         });
 
         // Tmp hack for actions. Should probably do this as a mixin for all widgets later.
@@ -28,19 +28,19 @@ var TextWidget = Marionette.View.extend({
 
     },
 
-    showText: function(txt) {
+    showText: function(opts) {
         // @TODO: get this from settings.
         var dfd = new $.Deferred();
 
         this.$el.empty();
-        var words = txt.split(' ');
+        var words = opts.text.split(' ');
 
         var _showNextWord = () => {
             var envSettings = this.broadcastChannel.request('settings:get') || {};
 
 
             if (words.length == 0) {
-                if (this.autoAdvance || envSettings.autoAdvance) {
+                if (opts.autoAdvance || this.autoAdvance || envSettings.autoAdvance) {
                     dfd.resolve();
                 } else {
                     var $nextButton = $('<span class="button tiny">&gt;</span>');
@@ -53,7 +53,7 @@ var TextWidget = Marionette.View.extend({
                 return;
             }
 
-            var txtSpeed = envSettings.textSpeed || 10;
+            var txtSpeed = opts.textSpeed || envSettings.textSpeed || 10;
 
             var nextWord = words.shift();
             var $wordEl = $('<span style="opacity:0;">').html(' ' + nextWord);

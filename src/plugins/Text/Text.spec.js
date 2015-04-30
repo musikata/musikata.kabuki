@@ -28,12 +28,13 @@ describe('TextWidget', function() {
   it('should show text', function(done) {
     var tw = new Text.widgets.TextWidget({
         channel: channel,
-        broadcastChannel: broadcastChannel
+        broadcastChannel: broadcastChannel,
+        autoAdvance: true
     });
     $container.append(tw.$el);
     tw.render();
     var testText = 'The canteloupe is the queen of fruits.';
-    tw.showText(testText).then(function() {;
+    tw.showText({text: testText}).then(function() {;
         expect($container.text()).toContain(testText);
         done();
     })
