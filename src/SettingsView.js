@@ -12,11 +12,15 @@ var _ = require('underscore');
 var SettingsView = Marionette.ItemView.extend({
     className: 'kb-settings',
     template: _.template('SETTINGS' +
-        '<div class="text-speed"></div>'
+        '<div class="text-speed"></div>' +
+        '<div><label>auto advance?</label><input type="checkbox" class="auto-advance"></div>' +
+        '<div class="advance-delay"></div>'
     ),
 
     ui: {
-        textSpeed: '.text-speed'
+        textSpeed: '.text-speed',
+        autoAdvance: '.auto-advance',
+        advanceDelay: '.advance-delay'
     },
 
     constructor: function(opts) {
@@ -38,6 +42,21 @@ var SettingsView = Marionette.ItemView.extend({
                 this.model.set('textSpeed', ui.value);
             }
         });
+
+        $(this.ui.autoAdvance).on('change', () => {
+            this.model.set('autoAdvance', $(this.ui.autoAdvance).prop('checked'));
+        });
+
+        $(this.ui.advanceDelay).slider({
+            value: 50,
+            min: 0,
+            max: 100,
+            step: 20,
+            change: (e, ui) => {
+                this.model.set('advanceDelay', ui.value);
+            }
+        });
+
     }
 });
 
