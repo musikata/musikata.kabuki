@@ -5,6 +5,7 @@ var CorePlugin = require('kabuki/src/plugins/Core/Core');
 var TextPlugin = require('kabuki/src/plugins/Text/Text');
 var ImagePlugin = require('kabuki/src/plugins/Image/Image');
 var AudioPlugin = require('kabuki/src/plugins/Audio/Audio');
+var HtmlPlugin = require('kabuki/src/plugins/Html/Html');
 
 var audioCtx = require('kabuki/src//AudioManager/AudioContext');
 var AudioManager = require('kabuki/src/AudioManager/AudioManager');
@@ -91,10 +92,9 @@ var script = {
 
         // Status: settings launcher.
         {cmd: 'widget:request', widgetId: 'statusLayout', req: 'region:add', opts: {id: 'settingsLauncherRegion', className: 'settings-launcher'}},
-        {cmd: 'widget:create', widgetClass: 'Text:TextWidget', widgetId: 'settingsLauncher', regionId: 'statusLayout:settingsLauncherRegion',
-            widgetOpts: {cmdTriggers: {'click': {cmd: 'theatre:toggleSettings'}}}
+        {cmd: 'widget:create', widgetClass: 'Html:HtmlWidget', widgetId: 'settingsLauncher', regionId: 'statusLayout:settingsLauncherRegion',
+            widgetOpts: {cmdTriggers: {'click': {cmd: 'theatre:toggleSettings'}}, html: 'S'}
         },
-        {cmd: 'widget:request', widgetId: 'settingsLauncher', req: 'showText', opts: {text: 'S', autoAdvance: true}},
 
         // Setup text region.
         {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'textRegion'}},
@@ -120,7 +120,8 @@ $(document).ready(function() {
             'Core': CorePlugin,
             'Text': TextPlugin,
             'Audio': AudioPlugin,
-            'Image': ImagePlugin
+            'Image': ImagePlugin,
+            'Html': HtmlPlugin
         },
         assetsToLoad: assetsToLoad
     });
