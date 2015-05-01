@@ -31,12 +31,14 @@ var KabukiApp = Marionette.Application.extend({
         });
         this.settings = settings;
 
+        var broadcastChannel = this.channel;
         this.theatre = new TheatreView({
             el: opts.el,
             channel: this.channel,
             getSettingsView: function() {
                 return new SettingsView({
-                    model: settings
+                    model: settings,
+                    broadcastChannel: broadcastChannel
                 });
             }
         });
@@ -47,7 +49,7 @@ var KabukiApp = Marionette.Application.extend({
             widgetRegistry: this.widgetRegistry,
             theatreChannel: this.theatre.channel
         });
-        this.channel.on('cmd', this.commandHandler.handle, this.commandHandler);
+        this.channel.reply('cmd', this.commandHandler.handle, this.commandHandler);
 
         this.channel.reply('settings:get', this.getSettings, this);
         this.channel.reply('settings:set', this.setSettings, this);

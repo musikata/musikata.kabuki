@@ -14,6 +14,7 @@ body {
   height: 280px;
   width: 240px;
   border: thin solid #eee;
+  position: relative;
 }
 
 .kb-stage {
@@ -39,4 +40,13 @@ body {
     .settings-launcher {
         float: right;
     }
+}
+
+.kb-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: white;
 }

@@ -48,7 +48,7 @@ var LayoutWidget = Marionette.LayoutView.extend({
 
     addRegion: function(opts) {
         var regionElId = this.cid + '-r-' + opts.id;
-        var classAttr = opts.className ? 'class="' + opts.className + '"' : '';
+        var classAttr = opts.classAttr ? 'class="' + opts.classAttr + '"' : '';
         var $regionEl = $('<div id="' + regionElId + '"' + classAttr + '>');
         if (opts.style) {
             $regionEl.css(opts.style);

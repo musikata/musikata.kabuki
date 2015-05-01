@@ -12,12 +12,14 @@ var _ = require('underscore');
 var SettingsView = Marionette.ItemView.extend({
     className: 'kb-settings',
     template: _.template('SETTINGS' +
+        '<span class="close-button">X</span>' + 
         '<div class="text-speed"></div>' +
         '<div><label>auto advance?</label><input type="checkbox" class="auto-advance"></div>' +
         '<div class="advance-delay"></div>'
     ),
 
     ui: {
+        closeButton: '.close-button',
         textSpeed: '.text-speed',
         autoAdvance: '.auto-advance',
         advanceDelay: '.advance-delay'
@@ -30,6 +32,7 @@ var SettingsView = Marionette.ItemView.extend({
 
     initialize: function(opts) {
         this.channel = opts.channel;
+        this.broadcastChannel = opts.broadcastChannel;
     },
 
     onRender: function() {
@@ -55,6 +58,10 @@ var SettingsView = Marionette.ItemView.extend({
             change: (e, ui) => {
                 this.model.set('advanceDelay', ui.value);
             }
+        });
+
+        $(this.ui.closeButton).on('click', () => {
+            this.broadcastChannel.request('cmd', {cmd: 'theatre:toggleSettings'});
         });
 
     }

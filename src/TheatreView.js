@@ -9,17 +9,15 @@ var LayoutWidget = require('./plugins/Core/Core').widgets.LayoutWidget;
 var ControlsView = require('./ControlsView');
 
 
-var TheatreLayoutView = Marionette.LayoutView.extend({
+var TheatreLayoutView = LayoutWidget.extend({
     className: 'kb-theatre',
     template: _.template('' +
-        '<div class="kb-settings"></div>' + 
         '<div class="kb-stage"></div>' + 
         '<div class="kb-controls"></div>'
     ),
     regions: {
         stage: '.kb-stage',
         controls: '.kb-controls',
-        settings: '.kb-settings'
     },
 
     initialize: function(opts) {
@@ -31,10 +29,14 @@ var TheatreLayoutView = Marionette.LayoutView.extend({
         };
 
         this.channel.reply('toggleSettings', this.toggleSettingsView, this);
+
     },
 
     onRender: function() {
         this.showChildView('controls', new ControlsView());
+
+        // Create modal region for settings.
+        this.addModalRegion({id: 'settings'});
 
     },
 
@@ -51,12 +53,40 @@ var TheatreLayoutView = Marionette.LayoutView.extend({
         this.showChildView('stage', this.stage);
     },
 
-    toggleSettingsView: function() {
-        if (this.getRegion('settings').hasView()) {
-            this.getRegion('settings').empty({preventDestroy: true});
-        } else {
-            this.showChildView('settings', this.getSettingsView());
+    addModalRegion: function(opts) {
+        // @TODO: Hmm...think on whether this should go here or
+        // in LayoutWidget.
+        this.addRegion({
+            id: opts.id,
+            classAttr: 'kb-modal' + (opts.classAttr || ''),
+            style: _.extend({display: 'none'}, opts.style)
+        });
+        if (opts.show) {
+            this.toggleModal(opts);
         }
+    },
+
+    toggleModalRegion: function(opts) {
+        // @TODO: add in pausing, for text and sound.
+       var region = this.getRegion(opts.id);
+       var promise;
+       if (region.$el.is(':visible')) {
+        promise = region.$el.fadeOut().promise();
+       } else {
+        promise =region.$el.fadeIn().promise();
+       }
+
+       return promise;
+    },
+
+    toggleSettingsView: function() {
+        var settingsRegion = this.getRegion('settings');
+        if (settingsRegion.hasView()) {
+            settingsRegion.empty({preventDestroy: true});
+        } else {
+            settingsRegion.show(this.getSettingsView());
+        }
+        this.toggleModalRegion({id: 'settings'});
     }
 });
 

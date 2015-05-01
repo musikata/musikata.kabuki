@@ -72,17 +72,17 @@ var script = {
         {cmd: 'theatre:toggleSettings'},
 
         // Setup status region.
-        {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'statusRegion', className: 'status', style: {opacity: 0}}},
+        {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'statusRegion', classAttr: 'status', style: {opacity: 0}}},
         {
             cmd: 'widget:create', widgetClass: 'Core:LayoutWidget', 
-            widgetId: 'statusLayout', regionId: 'stage:statusRegion', widgetOpts: {className: 'status-layout'}
+            widgetId: 'statusLayout', regionId: 'stage:statusRegion', widgetOpts: {classAttr: 'status-layout'}
         },
         {cmd: 'widget:request', widgetId: 'stage', req: 'region:animate', opts: {
             id: 'statusRegion', props: {opacity: 1}, opts: {duration: 1000}}
         },
 
         // Status:narrator.
-        {cmd: 'widget:request', widgetId: 'statusLayout', req: 'region:add', opts: {id: 'narratorRegion', className: 'narrator', style: {opacity: 0}}
+        {cmd: 'widget:request', widgetId: 'statusLayout', req: 'region:add', opts: {id: 'narratorRegion', classAttr: 'narrator', style: {opacity: 0}}
         },
         {cmd: 'widget:create', widgetClass: 'Image:ImageWidget', 
             widgetId: 'narratorImage', regionId: 'statusLayout:narratorRegion', widgetOpts: {uri: 'cricket-head-optimized.svg'}},
@@ -91,7 +91,7 @@ var script = {
         },
 
         // Status: settings launcher.
-        {cmd: 'widget:request', widgetId: 'statusLayout', req: 'region:add', opts: {id: 'settingsLauncherRegion', className: 'settings-launcher'}},
+        {cmd: 'widget:request', widgetId: 'statusLayout', req: 'region:add', opts: {id: 'settingsLauncherRegion', classAttr: 'settings-launcher'}},
         {cmd: 'widget:create', widgetClass: 'Html:HtmlWidget', widgetId: 'settingsLauncher', regionId: 'statusLayout:settingsLauncherRegion',
             widgetOpts: {html: 'S'}, cmdTriggers: {'click': {cmd: 'theatre:toggleSettings'}}
         },
