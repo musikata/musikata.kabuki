@@ -93,7 +93,7 @@ var script = {
         // Status: settings launcher.
         {cmd: 'widget:request', widgetId: 'statusLayout', req: 'region:add', opts: {id: 'settingsLauncherRegion', className: 'settings-launcher'}},
         {cmd: 'widget:create', widgetClass: 'Html:HtmlWidget', widgetId: 'settingsLauncher', regionId: 'statusLayout:settingsLauncherRegion',
-            widgetOpts: {cmdTriggers: {'click': {cmd: 'theatre:toggleSettings'}}, html: 'S'}
+            widgetOpts: {html: 'S'}, cmdTriggers: {'click': {cmd: 'theatre:toggleSettings'}}
         },
 
         // Setup text region.

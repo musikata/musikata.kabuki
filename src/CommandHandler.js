@@ -3,6 +3,7 @@
 * @TODO: Flesh this out!
 **/
 
+var _ = require('underscore');
 var $ = require('jquery');
 var Radio = require('backbone.radio');
 
@@ -31,6 +32,14 @@ class CommandHandler {
                     broadcastChannel: this.broadcastChannel, channel: widgetChannel
                 }, cmd.widgetOpts);
                 var widget = new widgetClass(mergedWidgetOpts);
+
+                // Wire widget command triggers, for things like
+                // click behavior.
+                _.each(cmd.cmdTriggers, (cmdTrigger, action) => {
+                    widget.$el.on(action, () => {
+                        this.handle(cmdTrigger);
+                    });
+                });
 
                 this.widgetRegistry.registerWidget({id: cmd.widgetId, widget: widget});
 

@@ -18,14 +18,6 @@ var TextWidget = Marionette.View.extend({
         this.channel.reply('showText', (opts) => {
             return this.showText(opts);
         });
-
-        // Tmp hack for actions. Should probably do this as a mixin for all widgets later.
-        _.each(this.cmdTriggers, function(cmd, event) {
-            this.$el.on(event, () => {
-                this.broadcastChannel.trigger('cmd', cmd);
-            });
-        }, this);
-
     },
 
     showText: function(opts) {
