@@ -4,7 +4,8 @@ var Marionette = require('kabuki/src/marionette-shim');
 
 
 var ControlsView = Marionette.ItemView.extend({
-    template: _.template('<span class="button expand" data-signal="next">next</span>'),
+    className: 'kb-controls',
+    template: _.template('<span class="button" data-signal="next">&gt;</span>'),
     events: {
         'click .button': 'onClickButton',
     },
