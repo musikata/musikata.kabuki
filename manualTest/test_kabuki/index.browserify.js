@@ -110,7 +110,7 @@ var script = {
 $(document).ready(function() {
 
     var $theatreEl = $('<div class="kb-theatre">');
-    $('body').append($theatreEl);
+    $('#main').append($theatreEl);
 
     var k = new Kabuki.KabukiApp({
         el: $theatreEl,

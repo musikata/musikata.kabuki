@@ -7,27 +7,60 @@ body {
   font-family: 'Merienda', cursive;
 }
 
+#app {
+    height: 480px;
+    width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+    border: thin solid #ddd;
+    display: flex;
+    flex-flow: column;
+}
+
+#header {
+    flex: initial;
+    background-color: white;
+}
+
+#main {
+    flex: 1 1 auto;
+    position: relative;
+}
+
+
 .kb-theatre {
-  margin-top: 100px;
-  margin-left: auto;
-  margin-right: auto;
-  height: 280px;
-  width: 240px;
-  border: thin solid #eee;
-  position: relative;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: thin solid #eee;
+    position: absolute;
 }
 
 .kb-stage {
-  height: 240px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-bottom: 48px;
+    background-color: #efefef;
 }
 
 .kb-controls {
-  height: 40px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  font-size: 18px;
   border-top: thin solid #eee;
+  overflow: hidden;
 }
 
 .status {
-    height: 2em;
+    height: 48px;
     background-color: #ccc;
 
     .narrator {
