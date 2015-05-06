@@ -108,7 +108,7 @@ var script = {
         {cmd: 'widget:create', widgetClass: 'Text:TextWidget', widgetId: 'text1', regionId: 'stage:textRegion'},
 
         // Start text.
-        {cmd: 'widget:request', widgetId: 'text1', req: 'showText', opts: {text: 'Let us begin with music'}},
+        {cmd: 'widget:request', widgetId: 'text1', req: 'showText', opts: {text: 'Let us begin with music.'}},
         {cmd: 'widget:request', widgetId: 'text1', req: 'showText', opts: {text: 'Listen.'}},
     ]
 };

@@ -25,15 +25,21 @@ var TextWidget = Marionette.View.extend({
         var dfd = new $.Deferred();
 
         this.$el.empty();
-        var words = opts.text.split(' ');
 
+        // Place hidden words for spacing.
+        var words = opts.text.split(' ');
+        _.each(words, (word) => {
+            $('<span style="opacity:0;">').html(' ' + word).appendTo(this.$el);
+        });
+
+        var curWordIdx = 0;
         var _showNextWord = () => {
 
             // Get settings.
             var settings = _.defaults({}, opts, this.options, 
                 this.broadcastChannel.request('settings:get'));
 
-            if (words.length == 0) {
+            if (curWordIdx == words.length) {
                 var advance = function() {
                     if (!settings.advanceDelay) {
                         dfd.resolve();
@@ -53,10 +59,8 @@ var TextWidget = Marionette.View.extend({
                 return;
             }
 
-
-            var nextWord = words.shift();
-            var $wordEl = $('<span style="opacity:0;">').html(' ' + nextWord);
-            $wordEl.appendTo(this.$el).fadeTo(400, 1);
+            this.$el.children().eq(curWordIdx).fadeTo(400, 1);
+            curWordIdx++;
             setTimeout(_showNextWord, settings.textSpeed);
         };
 
