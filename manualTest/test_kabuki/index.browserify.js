@@ -69,9 +69,10 @@ var script = {
         {cmd: 'widget:request', widgetId: 'stage', req: 'region:remove', opts: {id: 'imageRegion'}},
         */
 
-        {cmd: 'theatre:toggleSettings'},
+        //{cmd: 'theatre:toggleSettings'},
 
         // Setup status region.
+        /*
         {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'statusRegion', classAttr: 'status', style: {opacity: 0}}},
         {
             cmd: 'widget:create', widgetClass: 'Core:LayoutWidget', 
@@ -95,9 +96,15 @@ var script = {
         {cmd: 'widget:create', widgetClass: 'Html:HtmlWidget', widgetId: 'settingsLauncher', regionId: 'statusLayout:settingsLauncherRegion',
             widgetOpts: {html: 'S'}, cmdTriggers: {'click': {cmd: 'theatre:toggleSettings'}}
         },
+        */
+        // Setup sensei region.
+        {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'senseiRegion', className: 'sensei-region'}},
+        {cmd: 'widget:create', widgetClass: 'Html:HtmlWidget', widgetId: 'sensei',
+            regionId: 'stage:senseiRegion', widgetOpts: {html: '<image src="cricket_colored.svg"/>'}
+        },
 
         // Setup text region.
-        {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'textRegion'}},
+        {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'textRegion', className: 'text-region'}},
         {cmd: 'widget:create', widgetClass: 'Text:TextWidget', widgetId: 'text1', regionId: 'stage:textRegion'},
 
         // Start text.
