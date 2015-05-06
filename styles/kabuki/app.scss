@@ -102,8 +102,12 @@ body {
   right: 0;
   height: 48px;
   font-size: 18px;
-  border-top: thin solid #eee;
   overflow: hidden;
+  box-shadow: 0px -2px 2px #ddd;
+}
+
+.kb-controls {
+    text-align: right;
 }
 
 .status {
