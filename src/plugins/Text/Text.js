@@ -46,7 +46,9 @@ var TextWidget = Marionette.View.extend({
                     advance();
                 } else {
                     // @TODO: wait for 'next' signal.
-                    advance();
+                    this.broadcastChannel.on('controls:next', () => {
+                        advance();
+                    });
                 }
                 return;
             }

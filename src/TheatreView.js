@@ -33,7 +33,11 @@ var TheatreLayoutView = LayoutWidget.extend({
     },
 
     onRender: function() {
-        this.showChildView('controls', new ControlsView());
+        this.controlsView = new ControlsView({
+            channel: this.channel
+        });
+
+        this.showChildView('controls', this.controlsView);
 
         // Create modal region for settings.
         this.addModalRegion({id: 'settings'});
