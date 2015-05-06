@@ -12,12 +12,12 @@ var ControlsView = require('./ControlsView');
 var TheatreLayoutView = LayoutWidget.extend({
     className: 'kb-theatre',
     template: _.template('' +
-        '<div class="kb-stage"></div>' + 
-        '<div class="kb-controls"></div>'
+        '<div class="kb-stage-container"></div>' + 
+        '<div class="kb-controls-container"></div>'
     ),
     regions: {
-        stage: '.kb-stage',
-        controls: '.kb-controls',
+        stage: '.kb-stage-container',
+        controls: '.kb-controls-container',
     },
 
     initialize: function(opts) {
@@ -49,7 +49,7 @@ var TheatreLayoutView = LayoutWidget.extend({
     },
 
     showStage: function() {
-        this.stage = new LayoutWidget({channel: Radio.channel('stage')});
+        this.stage = new LayoutWidget({channel: Radio.channel('stage'), className: 'kb-stage'});
         this.showChildView('stage', this.stage);
     },
 

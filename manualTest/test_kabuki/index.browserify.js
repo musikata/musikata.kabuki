@@ -98,13 +98,13 @@ var script = {
         },
         */
         // Setup sensei region.
-        {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'senseiRegion', className: 'sensei-region'}},
+        {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'senseiRegion', className: 'stage-top'}},
         {cmd: 'widget:create', widgetClass: 'Html:HtmlWidget', widgetId: 'sensei',
             regionId: 'stage:senseiRegion', widgetOpts: {html: '<image src="cricket_colored.svg"/>'}
         },
 
         // Setup text region.
-        {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'textRegion', className: 'text-region'}},
+        {cmd: 'widget:request', widgetId: 'stage', req: 'region:add', opts: {id: 'textRegion', className: 'stage-bottom'}},
         {cmd: 'widget:create', widgetClass: 'Text:TextWidget', widgetId: 'text1', regionId: 'stage:textRegion'},
 
         // Start text.
