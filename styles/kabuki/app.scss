@@ -82,6 +82,9 @@ body {
 
     .stage-bottom {
         flex: 1 1 60%;
+        > div {
+            padding: 20px;
+        }
     }
 }
 

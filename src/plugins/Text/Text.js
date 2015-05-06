@@ -45,12 +45,8 @@ var TextWidget = Marionette.View.extend({
                 if (settings.autoAdvance) {
                     advance();
                 } else {
-                    var $nextButton = $('<span class="button tiny">&gt;</span>');
-                    this.$el.append($nextButton);
-                    $nextButton.on('click', function() {
-                        $nextButton.remove();
-                        advance();
-                    });
+                    // @TODO: wait for 'next' signal.
+                    advance();
                 }
                 return;
             }
