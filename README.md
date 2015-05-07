@@ -172,3 +172,8 @@ We may want to use Phaser later on, if we develop mini-games. But for now Phaser
 
 ## IN PROGRESS
 That's what we've got for now. Just some ideas! But coding is on the way...
+
+## General Ideas
+
+### Let People Build Virtual Coaches
+Another idea is to let teachers build their own virtual coaches. They could customize each coach for their student. E.g. 'practice this piece 5x, listen to this piece 10x'. Then the coach would give prompts to the student (or the student + parent). Inspired by talking with A.T. about suzuki piano teaching.
