@@ -4,6 +4,8 @@
 **/
 
 var $ = require('jquery');
+var _ = require('underscore');
+var Backbone = require('backbone');
 
 class AudioWidget {
   constructor(opts) {
@@ -11,6 +13,7 @@ class AudioWidget {
     this.channel = opts.channel;
 
     this.channel.reply('playSample', this.playSample, this);
+    _.extend(this, Backbone.Events);
   }
 
   playSample(sampleOpts) {
