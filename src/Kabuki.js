@@ -18,7 +18,7 @@ var Kabuki = {};
 
 var KabukiApp = Marionette.Application.extend({
 
-    initialize(opts) {
+    initialize: function(opts) {
 
         this.script = opts.script;
         this.plugins = opts.plugins;
@@ -57,7 +57,7 @@ var KabukiApp = Marionette.Application.extend({
         this.scriptProcessor = new ScriptProcessor({commandHandler: this.commandHandler});
     },
 
-    onStart() {
+    onStart: function() {
         this.theatre.render();
 
         this.theatre.showCurtains({loadingImgSrc: this.options.loadingImgSrc});

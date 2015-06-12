@@ -26,7 +26,7 @@ var SettingsView = Marionette.ItemView.extend({
     },
 
     constructor: function(opts) {
-        var decoratedOpts = Object.assign({model: new Backbone.Model()}, opts);
+        var decoratedOpts = _.extend({model: new Backbone.Model()}, opts);
         Marionette.ItemView.prototype.constructor.call(this, decoratedOpts);
     },
 

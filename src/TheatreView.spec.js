@@ -23,7 +23,7 @@ describe('TheatreView', function() {
     });
 
     function generateTheatreView(opts) {
-        var tv = new TheatreView(Object.assign({
+        var tv = new TheatreView(_.extend({
             el: $container, channel: channel}, opts));
         tv.render();
         return tv;

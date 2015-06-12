@@ -28,7 +28,7 @@ class CommandHandler {
                 var classParts = cmd.widgetClass.split(':');
                 var widgetClass = this.plugins[classParts[0]].widgets[classParts[1]];
                 var widgetChannel = Radio.channel(cmd.widgetId);
-                var mergedWidgetOpts = Object.assign({
+                var mergedWidgetOpts = _.extend({
                     broadcastChannel: this.broadcastChannel, channel: widgetChannel
                 }, cmd.widgetOpts);
                 var widget = new widgetClass(mergedWidgetOpts);
