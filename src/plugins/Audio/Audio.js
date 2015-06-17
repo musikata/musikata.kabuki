@@ -23,7 +23,7 @@ class AudioWidget {
         action: 'sample:start',
         time: this.audioManager.getCurrentTime(),
         sample: sample,
-        callback: () => {
+        onEnded: () => {
           playDfd.resolve();
         }
       });

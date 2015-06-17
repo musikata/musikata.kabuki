@@ -17,6 +17,9 @@ class AudioManager {
     // Set default action handlers.
     this.setActionHandler('sample:start', function(audioManager, event){
       var source = audioManager.getSampleSource(event.sample);
+      if (event.onEnded) {
+        source.onended = event.onEnded;
+      }
       source.connect( audioManager.audioContext.destination);
       source.start(event.time);
     });
